@@ -178,8 +178,9 @@
         function inviteMember(member) {
             if (!member.invited && member.online && member.webcam) {
                 conferenceSocket.publishChannel(member.member._id);
+                member.invited = !member.invited;
             }
-            member.invited = !member.invited;
+            
         }
 
         function chat() {
@@ -260,7 +261,7 @@
         conferenceSocket.onChat(function(text, memberId) {
             if (!vm.connected)
                 return;
-            var chatMember = _.find(scope.members, function(obj) {
+            var chatMember = _.find(vm.members, function(obj) {
                 return obj.member._id === memberId;
             });
             vm.chatMessage.push({
@@ -343,7 +344,7 @@
                         vm.pdfUrl = url;
                         pdfDelegate
                             .$getByHandle('my-pdf-container')
-                            .load(scope.pdfUrl);
+                            .load(vm.pdfUrl);
                     }
                 } else if (action === 'switchPage') {
                     if (url !== vm.pdfUrl) {
