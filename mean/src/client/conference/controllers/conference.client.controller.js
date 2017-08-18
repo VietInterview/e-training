@@ -62,6 +62,9 @@
             vm.students = CourseMembersService.byClass({
                 classroomId: vm.classroom._id
             }, function() {
+                vm.students = _.reject(vm.students, function (student) {
+                    return !student.member;
+                });
                 vm.members = [vm.teacher];
                 vm.members = vm.members.concat(vm.students);
 
@@ -180,7 +183,7 @@
                 conferenceSocket.publishChannel(member.member._id);
                 member.invited = !member.invited;
             }
-            
+
         }
 
         function chat() {
