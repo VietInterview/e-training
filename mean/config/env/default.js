@@ -3,6 +3,7 @@
 var s = module.exports = {
   app: {
     title: 'e-Training',
+    customer: "Aten",
     description: 'Corporate Learning Management System',
     keywords: 'Training, LMS, CMS, Enterprise',
     googleAnalyticsTrackingID: process.env.GOOGLE_ANALYTICS_TRACKING_ID || 'GOOGLE_ANALYTICS_TRACKING_ID'
