@@ -358,14 +358,18 @@
         });
         return;
       }
-      section.$remove(function(response) {
-        $window.location.reload();
-      }, function(errorResponse) {
-        Notification.error({
-          message: errorResponse.data.message,
-          title: '<i class="uk-icon-ban"></i> Section removed error!'
+      UIkit.modal.confirm($translate.instant('MODAL.COURSES.DELETE.PROMPT'), function() {
+        section.$remove(function(response) {
+          $window.location.reload();
+        }, function(errorResponse) {
+          Notification.error({
+            message: errorResponse.data.message,
+            title: '<i class="uk-icon-ban"></i> Section removed error!'
+          });
         });
       });
+
+      
     }
 
   }
