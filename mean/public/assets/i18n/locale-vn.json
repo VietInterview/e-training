@@ -856,6 +856,7 @@
 	"MODEL.CANDIDATE.NUMBER": "Số lần thi",
 	"MODAL.EXAM_STUDY.PROMPT": "Bạn đồng ý tham gia kỳ thi?",
 	"MODAL.MY_COURSES.PROMPT": "Bạn có muốn ngừng đăng ký?",
+	"MODAL.COURSES.DELETE.PROMPT": "Bạn có muốn xóa nội dung?",
 	"MODEL.MINUTE": "phút",
 	"REPORT.EXAM_RESULT.CHART": "Báo cáo kết quả theo kỳ thi",
 	"REPORT.STARTDATE": "Kinh nghiệm",

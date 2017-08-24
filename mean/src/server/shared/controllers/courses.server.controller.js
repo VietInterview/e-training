@@ -478,7 +478,7 @@ exports.uploadCourseScorm = function(req, res) {
                     if (!fs.existsSync(dirPath))
                         fs.mkdirSync(dirPath);
                     fs.createReadStream(filePath).pipe(unzip.Extract({ path: dirPath }));
-                    var packageUrl = path.join( config.uploads.course.scorm.urlPath ,  req.file.filename ,'res/index.html');
+                    var packageUrl = path.join( config.uploads.course.scorm.urlPath ,  req.file.filename ,'res/story_html5.html');
                     console.log(packageUrl);
                     resolve(packageUrl);
                 }

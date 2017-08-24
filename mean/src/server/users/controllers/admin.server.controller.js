@@ -135,6 +135,9 @@ exports.create = function(req, res, next) {
         var baseUrl = req.app.get('domain') || httpTransport + req.headers.host;
         res.render(path.resolve('src/server/users/templates/user-registeration-welcome-email'), {
           name: user.displayName,
+          username: user.username,
+          password: "123456",
+          customer: config.app.customer,
           appName: config.app.title
         }, function(err, emailHTML) {
           done(err, emailHTML, user);
