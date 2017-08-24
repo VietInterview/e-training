@@ -75,7 +75,7 @@ var s = module.exports = {
         dest: 'public/files/user/$USER_ID/',
         urlPath: '/files/user/$USER_ID/',
         limits: {
-          fileSize: 16 * 1024 * 1024 // Max file size in bytes (1 MB)
+          fileSize: 1024 * 1024 * 1024 // Max file size in bytes (1 GB)
         }
       },
       document: {
@@ -106,7 +106,7 @@ var s = module.exports = {
         dest: 'public/files/course/video/',
         urlPath: '/files/course/video/',
         limits: {
-          fileSize: 256 * 1024 * 1024 // Max file size in bytes (1 MB)
+          fileSize: 1024 * 1024 * 1024 // Max file size in bytes (1 GB)
         }
       },
       document: {
@@ -143,7 +143,7 @@ var s = module.exports = {
         dest: 'public/files/question/video/',
         urlPath: '/files/question/video/',
         limits: {
-          fileSize: 256 * 1024 * 1024 // Max file size in bytes (1 MB)
+          fileSize: 1024 * 1024 * 1024 // Max file size in bytes (1 MB)
         }
       },
       document: {
