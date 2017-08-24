@@ -15,7 +15,7 @@ var s = module.exports = {
   // DOMAIN config should be set to the fully qualified application accessible
   // URL. For example: https://www.myapp.com (including port if required).
   domain: 'localhost',
-  mediaServerUrl: 'ws://training.demo.vietinterview.com:8888/kurento',
+  mediaServerUrl: 'ws://125.212.233.22:8888/kurento',
   defaultPassword: '123456',
   whitelistEnabled: false,
   whitelistIP: '1.1.1.1',
@@ -74,7 +74,7 @@ var s = module.exports = {
         dest: 'public/files/user/$USER_ID/',
         urlPath: '/files/user/$USER_ID/',
         limits: {
-          fileSize: 16 * 1024 * 1024 // Max file size in bytes (1 MB)
+          fileSize: 1024 * 1024 * 1024 // Max file size in bytes (1 GB)
         }
       },
       document: {
@@ -105,7 +105,7 @@ var s = module.exports = {
         dest: 'public/files/course/video/',
         urlPath: '/files/course/video/',
         limits: {
-          fileSize: 256 * 1024 * 1024 // Max file size in bytes (1 MB)
+          fileSize: 1024 * 1024 * 1024 // Max file size in bytes (1 GB)
         }
       },
       document: {
@@ -142,7 +142,7 @@ var s = module.exports = {
         dest: 'public/files/question/video/',
         urlPath: '/files/question/video/',
         limits: {
-          fileSize: 256 * 1024 * 1024 // Max file size in bytes (1 MB)
+          fileSize: 1024 * 1024 * 1024 // Max file size in bytes (1 MB)
         }
       },
       document: {
