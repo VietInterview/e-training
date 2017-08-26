@@ -234,8 +234,9 @@
         });
     }
 
-    function editVisible(node) {
+    function editVisible(node, visible) {
       var section = node.data;
+      section.visible = visible;
       section.$update(function() {}, function(errorResponse) {
         Notification.error({
           message: errorResponse.data.message,
@@ -351,19 +352,21 @@
     }
 
     function removeSection(node) {
-      var section = node.data;
-      if (node.children.length > 0) {
-        Notification.error({
-          message: '<i class="uk-icon-ban"></i> Section not empty!'
-        });
-        return;
-      }
-      section.$remove(function(response) {
-        $window.location.reload();
-      }, function(errorResponse) {
-        Notification.error({
-          message: errorResponse.data.message,
-          title: '<i class="uk-icon-ban"></i> Section removed error!'
+      UIkit.modal.confirm($translate.instant('ALERT.CONFIRM_DELETE'), function() {
+        var section = node.data;
+        if (node.children.length > 0) {
+          Notification.error({
+            message: '<i class="uk-icon-ban"></i> Section not empty!'
+          });
+          return;
+        }
+        section.$remove(function(response) {
+          $window.location.reload();
+        }, function(errorResponse) {
+          Notification.error({
+            message: errorResponse.data.message,
+            title: '<i class="uk-icon-ban"></i> Section removed error!'
+          });
         });
       });
     }
