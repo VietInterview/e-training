@@ -352,14 +352,14 @@
     }
 
     function removeSection(node) {
-      UIkit.modal.confirm($translate.instant('ALERT.CONFIRM_DELETE'), function() {
-        var section = node.data;
-        if (node.children.length > 0) {
-          Notification.error({
-            message: '<i class="uk-icon-ban"></i> Section not empty!'
-          });
-          return;
-        }
+      var section = node.data;
+      if (node.children.length > 0) {
+        Notification.error({
+          message: '<i class="uk-icon-ban"></i> Section not empty!'
+        });
+        return;
+      }
+      UIkit.modal.confirm($translate.instant('MODAL.COURSES.DELETE.PROMPT'), function() {
         section.$remove(function(response) {
           $window.location.reload();
         }, function(errorResponse) {
@@ -369,6 +369,7 @@
           });
         });
       });
+      
     }
 
   }

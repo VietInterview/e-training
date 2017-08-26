@@ -39,6 +39,8 @@
     vm.updateTeacher = updateTeacher;
     vm.removeClassroom = removeClassroom;
     vm.displayUsers = [];
+    var listGroup;
+    vm.listStudentByGroup;
 
     $timeout(function() {
 
@@ -79,7 +81,40 @@
           value: obj._id
         };
       });
+      _renderStudent();
     });
+
+    function _getListGroup(callback) {
+      if(listGroup) {
+        callback(listGroup);
+      } else {
+        GroupsService.byCategory({
+          category: 'organization'
+        }, function(groups) {
+          listGroup = groups;
+          callback(listGroup);
+        });
+      }
+    }
+
+    function _renderStudent() {
+      vm.listStudentByGroup = [];
+      _getListGroup(function(listGroup) {
+        var groupStudent = _.groupBy(vm.students, function(student) {
+          return student.member.group;
+        });
+        Object.keys(groupStudent).forEach(function(key) {
+          var existGroup = _.find(listGroup, function(group) {
+            return group._id === key;
+          });
+          vm.listStudentByGroup.push({
+            group: existGroup,
+            students: groupStudent[key]
+          });
+        });
+        console.log(vm.listStudentByGroup);
+      });
+    }
 
     vm.classConfig = {
       create: false,
@@ -176,6 +211,7 @@
             vm.students = _.reject(vm.students, function(item) {
               return item._id === member._id;
             });
+          _renderStudent();
         });
       });
     }
@@ -252,6 +288,7 @@
                     message: '<i class="uk-icon-check"></i> Member ' + user.displayName + ' enroll successfully!'
                   });
                   vm.students.push(member);
+                  _renderStudent();
                 }, function(errorResponse) {
                   Notification.error({
                     message: 'Error: ' + $translate.instant('ERROR.COURSE_REGISTER.DATE') + ' !'
