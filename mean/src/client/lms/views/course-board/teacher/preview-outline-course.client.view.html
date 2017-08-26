@@ -10,7 +10,7 @@
 							{{vm.course.name}}</h3>
 					</div>
 					<div class="md-card-content">
-						<ul class="uk-nav">
+						<ul class="uk-nav" id="lessons-list">
 							<li ng-repeat="node in vm.nodes">
 								<span class="sub-heading">
 									<i ng-show="!node.expand" ng-click="vm.expand(node)"
@@ -34,16 +34,16 @@
 				<div class="md-card" ng-show="vm.selectedContentNode">
 					<div class="md-card-toolbar" style="min-height: 48px; height: initial;">
 						<div class="md-card-toolbar-actions" style="width: 220px;">
-							<a ng-click="vm.nextSection()"
-								class="md-btn md-btn-small md-btn-flat md-btn-flat-primary">
-								<i class="uk-icon-arrow-right "></i> {{'ACTION.NEXT'|translate}}
-							</a>
 							<a ng-click="vm.prevSection()"
 								class="md-btn md-btn-small md-btn-flat md-btn-flat-primary"><i
 								class="uk-icon-arrow-left"></i> {{'ACTION.PREV'|translate}}
 							</a>
-						</div>
-						<h3 class="md-card-toolbar-heading-text large" style="width: calc(100% - 225px); min-height: 48px; line-height: 30px; height: initial;">
+              <a ng-click="vm.nextSection()"
+                 class="md-btn md-btn-small md-btn-flat md-btn-flat-primary">
+                <i class="uk-icon-arrow-right "></i> {{'ACTION.NEXT'|translate}}
+              </a>
+            </div>
+						<h3 class="md-card-toolbar-heading-text large" style="width: calc(100% - 225px); min-height: 48px; line-height: 48px; height: initial;">
 							<span>{{vm.selectedContentNode.title}} </span>
 						</h3>
 					</div>

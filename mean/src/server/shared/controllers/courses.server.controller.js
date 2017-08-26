@@ -478,7 +478,7 @@ exports.uploadCourseScorm = function(req, res) {
                     if (!fs.existsSync(dirPath))
                         fs.mkdirSync(dirPath);
                     fs.createReadStream(filePath).pipe(unzip.Extract({ path: dirPath }));
-                    var packageUrl = path.join( config.uploads.course.scorm.urlPath ,  req.file.filename ,'story_flash.html?tincan=true');
+                    var packageUrl = path.join( config.uploads.course.scorm.urlPath ,  req.file.filename ,'story.html');
                     console.log(packageUrl);
                     resolve(packageUrl);
                 }
@@ -527,10 +527,10 @@ exports.convertToHtml = function(req, res) {
 
                         var converter = new pdftohtml(filePath, "temp.html");
 
-                        // See presets (ipad, default) 
-                        // Feel free to create custom presets 
-                        // see https://github.com/fagbokforlaget/pdftohtmljs/blob/master/lib/presets/ipad.js 
-                        // convert() returns promise 
+                        // See presets (ipad, default)
+                        // Feel free to create custom presets
+                        // see https://github.com/fagbokforlaget/pdftohtmljs/blob/master/lib/presets/ipad.js
+                        // convert() returns promise
                         converter.convert().then(function() {
                             console.log("Success");
                             fs = require('fs');
