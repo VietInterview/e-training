@@ -894,6 +894,8 @@
   "Section": "Lựa chọn",
   "Setting": "Cài đặt",
   "Submission": "Phân quyền",
-  "Topic": "Đề tài"
-
+  "Topic": "Đề tài",
+	"ACTION.SCORM_FULL": "Xem toàn màn hình",
+  "SELECT.ORDER_BY": "Sắp xếp theo...",
+  "ALERT.CONFIRM_DELETE": "Bạn chắc chắn muốn xóa?"
 }

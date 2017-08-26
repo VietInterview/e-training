@@ -1,7 +1,22 @@
 <div class="uk-grid">
 	<div class="uk-width-medium-1-1">
-		<div class="content-html" style="height: 650px;">
-			<iframe style="width: 100%; height: 650px" ng-src="{{vm.scorm.packageUrl}}" ng-show="vm.scorm.packageUrl"></iframe>
+		<div class="content-html">
+      <a href="#my-id" data-uk-modal style="position: absolute;right: 40px;"
+         data-uk-tooltip="{cls:'uk-tooltip-small',pos:'bottom'}"
+         title="{{'ACTION.SCORM_FULL'|translate}}"
+      >
+        <i class="material-icons md-24" style="font-size: 30px;"></i>
+      </a>
+
+      <!-- This is the modal -->
+      <div id="my-id" class="uk-modal">
+        <div class="uk-modal-dialog" style="margin: 0;width: 100%;height: 100%;max-width: 100%;padding: 0">
+          <a class="uk-modal-close uk-close"></a>
+          <iframe scrolling="no" style="width: 100%; height: 100%" ng-src="{{vm.scorm.packageUrl}}" ng-show="vm.scorm.packageUrl"></iframe>
+        </div>
+      </div>
+
+      <iframe scrolling="no" id="packageUrl" style="width: 100%; height: 60vh" ng-src="{{vm.scorm.packageUrl}}" ng-show="vm.scorm.packageUrl"></iframe>
 		</div>
 	</div>
 </div>
