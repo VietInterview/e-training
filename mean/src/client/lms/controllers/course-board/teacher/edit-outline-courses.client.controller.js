@@ -234,8 +234,9 @@
         });
     }
 
-    function editVisible(node) {
+    function editVisible(node, visible) {
       var section = node.data;
+      section.visible = visible;
       section.$update(function() {}, function(errorResponse) {
         Notification.error({
           message: errorResponse.data.message,
@@ -369,7 +370,6 @@
         });
       });
 
-      
     }
 
   }

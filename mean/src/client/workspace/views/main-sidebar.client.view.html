@@ -1,8 +1,8 @@
 <!-- main sidebar -->
 <aside id="sidebar_main" sidebar-primary custom-scrollbar
        ng-class="{ 'accordion_mode': menuAccordionMode }">
-    <div class="sidebar_main_header" ng-if="!fullHeaderActive" style="height: 170px;">
-        <div class="sidebar_logo" style="height: 80%;">
+    <div class="sidebar_main_header" ng-if="!fullHeaderActive">
+        <div class="sidebar_logo">
             <a ui-sref="workspace.dashboard"
                class="sSidebar_hide sidebar_logo_large"> <img
                     style="border: none;" class="logo_regular"
@@ -15,8 +15,7 @@
                 src="/assets/img/brand/jupviec-logo1.png" width="100" height="15" alt=""/> <img
                 style="border: none;" class="logo_light"
                 src="/assets/img/brand/jupviec-logo1.png" width="100" height="15" alt=""/>
-        </a>
-
+             </a>
         </div>
 
         <div class="sidebar_actions" ng-if="vm.hasAdminRole"

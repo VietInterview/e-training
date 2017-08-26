@@ -132,7 +132,7 @@ var UserSchema = new Schema({
   },
   profileImageURL: {
     type: String,
-    default: '/files/logo/uploads/place-holder.png'
+    default: '/files/logo/uploads/profile-holder.png'
   },
   provider: {
     type: String,
