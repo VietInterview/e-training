@@ -14,7 +14,7 @@
       plugins: [
         'advlist autolink lists link image charmap print preview anchor',
         'searchreplace visualblocks code fullscreen',
-        'insertdatetime media mediaembed table contextmenu paste'
+        'insertdatetime media table contextmenu paste'
       ],
       media_live_embeds: true,
       relative_urls : false,

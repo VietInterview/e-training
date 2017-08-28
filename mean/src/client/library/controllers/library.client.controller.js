@@ -6,9 +6,9 @@
     .module('library')
     .controller('LibraryController', LibraryController);
 
-  LibraryController.$inject = ['$scope', '$state', '$window', 'Authentication', '$timeout', 'LibraryMediaService', 'Notification', 'GroupsService', 'treeUtils', '_'];
+  LibraryController.$inject = ['$scope', '$state', '$window', 'Authentication', '$timeout', 'LibraryMediaService', 'Notification', 'GroupsService', 'treeUtils', '_', '$translate'];
 
-  function LibraryController($scope, $state, $window, Authentication, $timeout, LibraryMediaService, Notification, GroupsService, treeUtils, _) {
+  function LibraryController($scope, $state, $window, Authentication, $timeout, LibraryMediaService, Notification, GroupsService, treeUtils, _, $translate) {
     var vm = this;
     vm.keyword = '';
 
@@ -61,7 +61,7 @@
       valueField: 'value',
       labelField: 'label',
       create: false,
-      placeholder: 'Choose...'
+      placeholder: $translate.instant("SELECT.ORDER_BY")
     };
     function toggleExpand(node) {
       node.data.mediumList = [];

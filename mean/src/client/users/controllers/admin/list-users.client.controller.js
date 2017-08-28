@@ -5,13 +5,14 @@
     .module('users.admin')
     .controller('UserListController', UserListController);
 
-  UserListController.$inject = ['$scope', '$state', '$filter', '$compile', 'Authentication', 'AdminService', '$timeout', '$location', '$window', 'GroupsService', 'DTOptionsBuilder', 'DTColumnBuilder', 'Notification', '$q', 'treeUtils', '$translate', '_'];
+  UserListController.$inject = ['$scope', '$state', '$filter', '$compile', 'Authentication', 'AdminService', '$timeout', '$location', '$window', 'GroupsService', 'DTOptionsBuilder', 'DTColumnBuilder', 'Notification', '$q', 'treeUtils', '$translate', '_', 'userResolve'];
 
-  function UserListController($scope, $state, $filter, $compile, Authentication, AdminService, $timeout, $location, $window, GroupsService, DTOptionsBuilder, DTColumnBuilder, Notification, $q, treeUtils, $translate, _) {
+  function UserListController($scope, $state, $filter, $compile, Authentication, AdminService, $timeout, $location, $window, GroupsService, DTOptionsBuilder, DTColumnBuilder, Notification, $q, treeUtils, $translate, _, user) {
     var vm = this;
     vm.finishEditOrgTree = finishEditOrgTree;
     vm.remove = remove;
     vm.dtInstance = {};
+    vm.user = user;
 
     vm.dtOptions = DTOptionsBuilder.fromFnPromise(loadUser).withOption('createdRow', function(row, data, dataIndex) {
       // Recompiling so we can bind Angular directive to the DT

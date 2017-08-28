@@ -27,7 +27,7 @@
       });
       vm.nodes = treeUtils.buildCourseTree(vm.sections);
       _.each(vm.nodes, function(node) {
-        treeUtils.expandCourseNode(node, true);
+        treeUtils.expandCourseNode(node, false);
       });
       vm.nodeList = treeUtils.buildCourseListInOrder(vm.nodes);
 
