@@ -1619,7 +1619,7 @@ a.uk-datepicker-table-muted {
 
 #page_heading {
     padding: 12px !important;
-    height: 66px !important;
+    height: auto !important;
     min-height: 66px !important;
 }
 
@@ -1648,9 +1648,11 @@ a.uk-datepicker-table-muted {
     font-size: 14px;
 }
 
-#page_heading h1 input[type="text"] {
-    padding: 0;
-    margin: -6px 0 5px 42px;
+@media (min-width: 768px) {
+    #page_heading h1 input[type="text"] {
+        padding: 0;
+        margin: -6px 0 5px 42px;
+    }
 }
 
 #divSwf {
@@ -1753,4 +1755,52 @@ group-tree-view .fancytree-container {
 
 .course-thumbnail {
     border-bottom: 1px solid #f0f0f0!important;
+}
+
+::-webkit-scrollbar-track
+{
+    background-color: #ffffff;
+}
+
+::-webkit-scrollbar
+{
+    width: 6px;
+    height: 6px;
+    background-color: #ffffff;
+}
+
+::-webkit-scrollbar-thumb
+{
+    background-color: @theme_primary_color;
+}
+
+.parsley-errors-list {
+    list-style: none;
+    padding-left:0;
+}
+
+@media (min-width: 768px) {
+    .workspace-lms-courses-outline-preview {
+        width: calc(100% - 225px);
+        min-height: 48px;
+        line-height: 48px;
+        height: initial;
+    }
+}
+
+@media (max-width: 425px) {
+    #lessons-list {
+        padding-right: 5px;
+    }
+    #page_heading .md-input-wrapper {
+        width: calc(100% - 132px);
+    }
+}
+
+.scorm-fullscreen-button {
+    position: absolute;
+    right: 20px;
+    top: 16px;
+    z-index: 999;
+    background-color: #fff;
 }
