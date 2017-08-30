@@ -1771,7 +1771,7 @@ group-tree-view .fancytree-container {
 
 ::-webkit-scrollbar-thumb
 {
-    background-color: @theme_primary_color;
+    background-color: @theme_dark_color;
 }
 
 .parsley-errors-list {
@@ -1803,4 +1803,11 @@ group-tree-view .fancytree-container {
     top: 16px;
     z-index: 999;
     background-color: #fff;
+}
+
+@media (max-width: 768px) {
+    #page_content .uk-sticky-placeholder,
+    #page_heading {
+        height:auto!important;
+    }
 }
