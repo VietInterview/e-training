@@ -80,6 +80,9 @@
               }, function(exam) {
                 memberScoreByAttempt(member, latestAttempt, exam, edition).then(function(result) {
                   result.sectionId = section._id;
+                  var differenceTravel = new Date(latestAttempt.end).getTime() - new Date(latestAttempt.start).getTime();
+                  var seconds = Math.floor((differenceTravel) / (1000));
+                  result.timeStart = seconds;
                   resolve(result);
                 });
               });
