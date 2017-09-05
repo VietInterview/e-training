@@ -23,7 +23,7 @@
         return m.published;
       });
 
-      vm.medium = vm.allMedias;
+      vm.medium = _.sortBy(vm.allMedias, '-created');
     });
 
     vm.getAllMedias = function() {

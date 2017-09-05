@@ -3,7 +3,7 @@
 
 *,
 body {
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .lowercase {
@@ -129,7 +129,7 @@ body {
 
 .main-search-box {
   padding-bottom: 15px;
-
+  text-align: right;
   input {
     border: 1px solid #a7a7a7;
     min-width: 70%;
@@ -191,10 +191,6 @@ body {
 }
 
 @media (max-width: 800px) {
-  .courses-container {
-    padding-bottom: 70px;
-  }
-
   .textdownload {
     display: none;
   }
@@ -819,7 +815,6 @@ span.capitalize::before {
 
     a.md-btn {
       font-size: 11px !important;
-      padding: 2px 0px;
     }
 
     .md-card .md-card-toolbar div.md-card-toolbar-actions {
@@ -871,6 +866,8 @@ span.capitalize::before {
 
     .media-des {
       margin-bottom: 3px;
+      max-height: 33px;
+      overflow: hidden;
     }
 
     .md-btn-icon-small,
@@ -880,7 +877,6 @@ span.capitalize::before {
 
     .text-title-program {
       font-size: 20px;
-      margin-right: 75px;
     }
 
     .text-title-program + a.md-btn-icon {
@@ -924,7 +920,6 @@ span.capitalize::before {
 
     .text-title-program {
       font-size: 18px;
-      margin-right: 75px;
     }
 
     .text-title-program + a.md-btn-icon {
@@ -932,7 +927,6 @@ span.capitalize::before {
     }
 
     .main-search-box {
-      margin-right: -30px;
       padding-left: 0px;
     }
 
@@ -990,11 +984,6 @@ span.capitalize::before {
 }
 
 @media (min-width: 376px) {
-  .text-title-program {
-    font-size: 23px;
-    margin-right: 110px;
-  }
-
   .text-title-program + a.md-btn-icon {
     margin-top: -50px;
   }
@@ -1032,12 +1021,6 @@ span.capitalize::before {
   margin-top: -10px;
 }
 
-@media (min-width: 351px) and (max-width: 479px) {
-  .main-search-box {
-    margin-right: -30px;
-  }
-}
-
 @media (min-width: 480px) and (max-width: 580px) {
   .container-home > .uk-grid > .heading_b {
     width: 100%;
@@ -1066,4 +1049,46 @@ span.capitalize::before {
 }
 .vjs-device-button.vjs-control{
   display: none !important;
+}
+
+@media (max-width: 767px) {
+  .md-card {
+    padding: 12px;
+  }
+  library-item  .md-card {
+    padding: 0;
+  }
+  .text-title-program {
+    font-size: 20px;
+    line-height:27px;
+  }
+  .main-search-box {
+    text-align: center;
+  }
+  .showmore-container {
+    margin-top:16px;
+  }
+  .container-home>.content-data {
+    margin-top:10px!important;
+  }
+  .md-btn-icon.md-btn-small {
+    min-width: 26px;
+    min-height: 26px;
+    height: 26px;
+  }
+  .md-card .md-card-content {
+    padding:0;
+  }
+}
+
+@media (max-width: 375px) {
+  .search-categories-list .uk-grid-small {
+    margin-left: 10px;
+  }
+}
+
+@media (max-width: 656px) {
+  #page_heading.uk-active {
+    position: relative!important;
+  }
 }
