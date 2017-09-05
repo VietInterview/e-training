@@ -594,7 +594,7 @@ gulp.task('lint', function(done) {
 
 // Lint project files and minify them into two production files.
 gulp.task('build', function(done) {
-  runSequence('env:prod', 'less', ['uglify', 'uglify-vendor', 'fontmin', 'html-minify'], done);
+  runSequence('env:prod', 'less', ['uglify', 'uglify-vendor', 'fontmin'], done);
 });
 
 // Run the project tests
