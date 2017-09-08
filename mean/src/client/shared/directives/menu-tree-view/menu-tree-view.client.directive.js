@@ -91,7 +91,7 @@
           _.each(menuSections, function(section) {
             section.selected = scope.menuItems && _.contains(scope.menuItems, section.key);
             _.each(section.children, function(obj) {
-              obj.selected = scope.menuItems && _.contains(scope.menuItems, section.key);
+              obj.selected = scope.menuItems && _.contains(scope.menuItems, obj.key);
             });
           });
           $timeout(function() {
