@@ -28,7 +28,7 @@
         }
       })
       .state('admin.workspace.library.content.list', {
-        url: '/list',
+        url: '/list?keyword',
         templateUrl: '/src/client/library/views/list-contents.client.view.html',
         controller: 'LibraryContentsListController',
         controllerAs: 'vm',
