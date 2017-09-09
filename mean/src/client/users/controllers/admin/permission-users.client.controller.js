@@ -31,7 +31,24 @@
         });
       });
     };
-    vm.endpoints = ApiEndpointsService.query();
+    vm.endpoints = ApiEndpointsService.query(function () {
+      var endpointsSystemPrefix = [
+        '/api/groups',
+        '/api/members',
+        '/api/settings'
+      ];
+      var endpointsCoursePrefix = [
+        '/api/courses',
+        '/api/programs',
+        '/api/competencies'
+      ];
+      vm.endpointsSystem = _.filter(vm.endpoints, function (endpoint) {
+        return endpointsSystemPrefix.indexOf(endpoint.prefix) > -1;
+      });
+      vm.endpointsCourse = _.filter(vm.endpoints, function (endpoint) {
+        return endpointsCoursePrefix.indexOf(endpoint.prefix) > -1;
+      });
+    });
 
     function newPermissionView() {
       vm.permissionView = new PermissionViewsService();
