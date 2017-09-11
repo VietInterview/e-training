@@ -218,7 +218,7 @@
             sectionId: node.data._id
           });
       } else
-        UIkit.modal.prompt($translate.instant('MODEL.GROUP.NAME'), '', function(val) {
+        UIkit.modal.prompt($translate.instant('MODEL.GROUP.NAME'), section.name, function(val) {
           val = val.trim();
           if (!val) {
             UIkit.modal.alert($translate.instant('ERROR.GROUP.EMPTY_NAME_NOT_ALLOW'));
