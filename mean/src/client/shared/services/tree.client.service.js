@@ -19,7 +19,7 @@
                   title: obj.name,
                   folder: true,
                   fullTitle: fullTitle + obj.name + ' / ',
-                  expanded: true,
+                  expanded: false,
                   key: obj._id,
                   children: [],
                   data: obj
