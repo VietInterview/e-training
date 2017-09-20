@@ -29,12 +29,16 @@
 			<div class="uk-width-1-1" ng-show="!vm.editMode">
 				<div class="md-card">
 					<div class="md-card-toolbar">
-						<div class="md-card-toolbar-actions">
-
-							<a class="md-btn  md-btn-icon md-btn-wave-light"
-								href='#view_permission' data-uk-modal="{ center:true }">{{'PAGE.USERS.PERMISSION.VIEW_PERMISSION'|translate}}</a>
-							<a class="md-btn  md-btn-icon md-btn-wave-light"
-								href='#api_permission' data-uk-modal="{ center:true }">{{'PAGE.USERS.PERMISSION.API_PERMISSION'|translate}}</a>
+						<div class="md-card-toolbar-actions" style="margin-top: -3px;">
+							<label>
+								<input type="search" class="md-input" placeholder="Search:" ng-model="search.displayName" />
+							</label>
+						</div>
+						<div class="action-button" style="float: right;margin-right: 20px;margin-top: 7px;">
+							<a class="md-btn btn-small md-btn-icon md-btn-wave-light"
+								 href='#view_permission' data-uk-modal="{ center:true }">{{'PAGE.USERS.PERMISSION.VIEW_PERMISSION'|translate}}</a>
+							<a class="md-btn btn-small md-btn-icon md-btn-wave-light"
+								 href='#api_permission' data-uk-modal="{ center:true }">{{'PAGE.USERS.PERMISSION.API_PERMISSION'|translate}}</a>
 						</div>
 						<h3 class="md-card-toolbar-heading-text uk-text-upper">
 							{{'PAGE.USERS.USER_LIST' | translate}}</h3>
@@ -51,7 +55,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr ng-repeat="user in vm.users"  ng-mouseout="user.mouseOver=false" ng-mouseover="user.mouseOver=true">
+							<tr ng-repeat="user in vm.users | filter:search"  ng-mouseout="user.mouseOver=false" ng-mouseover="user.mouseOver=true">
 								<td class="uk-text-center" style="line-height: 42px;">{{user.displayName}}</td>
 								<td class="uk-text-center">
 								<selectize
