@@ -23,15 +23,40 @@
 
     vm.selectGroup = function(groups) {
       vm.users = [];
+      vm.usersOrigin = [];
       _.each(groups, function(group) {
         AdminService.byGroup({
           groupId: group
         }, function(users) {
           vm.users = vm.users.concat(users);
+          vm.usersOrigin = vm.usersOrigin.concat(users);
         });
       });
     };
-    vm.endpoints = ApiEndpointsService.query();
+    vm.endpoints = ApiEndpointsService.query(function () {
+      var endpointsSystemPrefix = [
+        '/api/groups',
+        '/api/members',
+        '/api/settings'
+      ];
+      var endpointsCoursePrefix = [
+        '/api/courses',
+        '/api/programs',
+        '/api/competencies'
+      ];
+      vm.endpointsSystem = _.filter(vm.endpoints, function (endpoint) {
+        return endpointsSystemPrefix.indexOf(endpoint.prefix) > -1;
+      });
+      vm.endpointsCourse = _.filter(vm.endpoints, function (endpoint) {
+        return endpointsCoursePrefix.indexOf(endpoint.prefix) > -1;
+      });
+    });
+
+    vm.doSearchUser = function () {
+      vm.users = _.filter(vm.usersOrigin, function (user) {
+        return user.displayName.indexOf(vm.search) > -1;
+      });
+    }
 
     function newPermissionView() {
       vm.permissionView = new PermissionViewsService();
