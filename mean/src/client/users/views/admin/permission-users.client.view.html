@@ -31,7 +31,8 @@
 					<div class="md-card-toolbar">
 						<div class="md-card-toolbar-actions" style="margin-top: -3px;">
 							<label>
-								<input type="search" class="md-input" placeholder="Search:" ng-model="search.displayName" />
+								<input type="search" class="md-input" placeholder="Search:" ng-model="vm.search"
+                       ng-keyup="$event.keyCode == 13 && vm.doSearchUser()"/>
 							</label>
 						</div>
 						<div class="action-button" style="float: right;margin-right: 20px;margin-top: 7px;">
@@ -55,7 +56,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr ng-repeat="user in vm.users | filter:search"  ng-mouseout="user.mouseOver=false" ng-mouseover="user.mouseOver=true">
+							<tr ng-repeat="user in vm.users"  ng-mouseout="user.mouseOver=false" ng-mouseover="user.mouseOver=true">
 								<td class="uk-text-center" style="line-height: 42px;">{{user.displayName}}</td>
 								<td class="uk-text-center">
 								<selectize
