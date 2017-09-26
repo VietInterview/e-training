@@ -80,6 +80,13 @@
               totalScore: scores.totalPercent,
               scores: scores.scores
             };
+
+            curr.totalScore = scores.totalPercent;
+
+            vm.members = _.sortBy(vm.members, function (member) {
+              return member.totalScore * -1;
+            });
+
           });
         });
       }, $q.resolve()).then(function() { // Export to csv file
