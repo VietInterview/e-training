@@ -58,7 +58,7 @@
                 dragDrop: function(node, data) {
                   data.otherNode.moveTo(node, data.hitMode);
                   var group = data.otherNode.data;
-                  if (node.parent.key.indexOf('root') === false) {
+                  if (node.parent.data._id) {
                     group.parent = node.parent.key;
                   } else {
                     group.parent = null;
