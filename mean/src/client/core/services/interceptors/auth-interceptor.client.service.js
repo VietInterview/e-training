@@ -38,7 +38,7 @@
             });
             break;
           case 500:
-            $injector.get('$state').transitionTo('error.server-error');
+            // $injector.get('$state').transitionTo('error.server-error');
             break;
           case -1: // Handle error if no response from server(Network Lost or Server not responding)
             var Notification = $injector.get('Notification');

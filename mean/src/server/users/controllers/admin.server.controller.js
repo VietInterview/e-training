@@ -314,17 +314,31 @@ exports.list = function(req, res) {
 };
 
 exports.userByGroup = function(req, res) {
-  User.find({
-    group: req.group._id
-  }, '-salt -password -providerData').sort('-created').populate('user', 'displayName').populate('group').exec(function(err, users) {
-    if (err) {
-      return res.status(422).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    }
+  if (req.group) {
+    User.find({
+      group: req.group._id
+    }, '-salt -password -providerData').sort('-created').populate('user', 'displayName').populate('group').exec(function (err, users) {
+      if (err) {
+        return res.status(422).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      }
 
-    res.json(users);
-  });
+      res.json(users);
+    });
+  } else {
+    User.find({
+      group: { $exists: false }
+    }, '-salt -password -providerData').sort('-created').populate('user', 'displayName').populate('group').exec(function (err, users) {
+      if (err) {
+        return res.status(422).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      }
+
+      res.json(users);
+    });
+  }
 };
 
 /**
