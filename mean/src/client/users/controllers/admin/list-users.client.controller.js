@@ -97,6 +97,10 @@
           Notification.success({
             message: '<i class="uk-icon-check"></i> User deleted successfully!'
           });
+        }, function (response) {
+          Notification.error({
+            message: '<i class="uk-icon-remove"></i> ' + response.data.message
+          });
         });
       });
     }
