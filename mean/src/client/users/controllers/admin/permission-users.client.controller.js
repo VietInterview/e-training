@@ -41,6 +41,7 @@
       ];
       var endpointsCoursePrefix = [
         '/api/courses',
+        '/api/sections',
         '/api/programs',
         '/api/competencies'
       ];
