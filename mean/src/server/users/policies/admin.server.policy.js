@@ -102,9 +102,7 @@ exports.isAllowed = function(req, res, next) {
                 }
               });
             } else
-              return res.status(400).json({
-                message: 'Permission denied 104'
-              });
+              return next();
           } else
             return res.status(400).json({
               message: 'Permission denied 108'
