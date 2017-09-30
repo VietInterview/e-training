@@ -41,6 +41,7 @@
       ];
       var endpointsCoursePrefix = [
         '/api/courses',
+        '/api/sections',
         '/api/programs',
         '/api/competencies'
       ];
@@ -54,7 +55,11 @@
 
     vm.doSearchUser = function () {
       vm.users = _.filter(vm.usersOrigin, function (user) {
-        return user.displayName.indexOf(vm.search) > -1;
+        return (
+          user.displayName.indexOf(vm.search) > -1 ||
+          user.email.indexOf(vm.search) > -1 ||
+          user.username.indexOf(vm.search) > -1
+        );
       });
     }
 
