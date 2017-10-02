@@ -76,10 +76,14 @@
                     {{member.member.displayName}}
                   </a>
                 </td>
-                <td class="uk-text-center" ng-repeat="score in vm.scoreMap[member._id].scores">
-                  {{score.rawPercent}}
+                <td class="uk-text-center" ng-repeat="score in vm.scoreMap[member._id].scores"
+                ng-if="vm.scoreMap[member._id].scores.length">
+                  {{score.rawPercent}}<span ng-show="score.timeStart" style="color: green"> ({{score.timeStart}}s)</span>
                 </td>
-                <td class="uk-text-center">{{vm.scoreMap[member._id].totalScore}}</td>
+                <td class="uk-text-center" ng-if="!vm.scoreMap[member._id].scores.length">
+                  0
+                </td>
+                <td class="uk-text-center">{{(vm.scoreMap[member._id].totalScore) ? vm.scoreMap[member._id].totalScore : 0}}</td>
                 <td class="uk-text-center">
                   <span ng-show="vm.scoreMap[member._id].totalScore >= vm.gradescheme.benchmark && member.enrollmentStatus=='completed'">{{"COMMON.PASS" | translate}}</span>
                   <span ng-show="vm.scoreMap[member._id].totalScore < vm.gradescheme.benchmark && member.enrollmentStatus=='completed'">{{"COMMON.FAIL" | translate}}</span>
@@ -113,10 +117,14 @@
             <tbody>
             <tr ng-repeat="member in vm.members">
               <td class="uk-text-center">{{member.member.displayName}}</td>
-              <td class="uk-text-center" ng-repeat="score in vm.scoreMap[member._id].scores">
+              <td class="uk-text-center" ng-repeat="score in vm.scoreMap[member._id].scores"
+              ng-if="vm.scoreMap[member._id].scores.length">
                 {{score.rawPercent}}
               </td>
-              <td class="uk-text-center">{{vm.scoreMap[member._id].totalScore}}</td>
+              <td class="uk-text-center" ng-if="!vm.scoreMap[member._id].scores.length">
+                0
+              </td>
+              <td class="uk-text-center">{{(vm.scoreMap[member._id].totalScore) ? vm.scoreMap[member._id].totalScore : 0}}</td>
               <td class="uk-text-center">
                 <span ng-if="vm.scoreMap[member._id].totalScore >= vm.gradescheme.benchmark && member.enrollmentStatus=='completed'">{{"COMMON.PASS" | translate}}</span>
                 <span ng-if="vm.scoreMap[member._id].totalScore < vm.gradescheme.benchmark && member.enrollmentStatus=='completed'">{{"COMMON.FAIL" | translate}}</span>

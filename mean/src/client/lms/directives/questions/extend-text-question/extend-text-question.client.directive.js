@@ -4,9 +4,9 @@
   // Open-text question
 
   angular.module('lms')
-    .directive('extendTextQuestion', ['fileManagerConfig', '_', extendTextQuestion]);
+    .directive('extendTextQuestion', ['fileManagerConfig', '_', '$sce', extendTextQuestion]);
 
-  function extendTextQuestion(fileManagerConfig, _) {
+  function extendTextQuestion(fileManagerConfig, _, $sce) {
     return {
       scope: {
         question: '=',
@@ -21,6 +21,7 @@
           controls: true,
           muted: false
         };
+        scope.question.description = $sce.trustAsHtml(scope.question.description);
         var x = $('.modal_record_video_drap');
         x.draggable();
         function preprocessQuestionContent() {

@@ -33,5 +33,5 @@ module.exports = function (app, db) {
 
   // Add passport's middleware
   app.use(passport.initialize());
-  app.use(passport.session());
+  app.use(passport.session({ secret: 'keyboard cat', cookie: { maxAge: 144000000 }}));
 };

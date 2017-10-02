@@ -81,8 +81,12 @@
                 var nodeIds = _.map(data.tree.getSelectedNodes(), function(obj) {
                   return obj.key;
                 });
-                if (scope.select)
+                if (scope.select) {
+                  if (data.tree.getSelectedNodes()[0] && data.tree.getSelectedNodes()[0].parent) {
+                    nodeIds.push(data.tree.getSelectedNodes()[0].parent.key);
+                  }
                   scope.select(nodeIds);
+                }
               });
             }
           });
@@ -91,7 +95,7 @@
           _.each(menuSections, function(section) {
             section.selected = scope.menuItems && _.contains(scope.menuItems, section.key);
             _.each(section.children, function(obj) {
-              obj.selected = scope.menuItems && _.contains(scope.menuItems, section.key);
+              obj.selected = scope.menuItems && _.contains(scope.menuItems, obj.key);
             });
           });
           $timeout(function() {

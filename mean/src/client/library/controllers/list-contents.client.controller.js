@@ -9,6 +9,15 @@
 
   function LibraryContentsListController($scope, $state, $stateParams, $timeout, $location, $window, GroupsService, Upload, Notification, LibraryMediaService, treeUtils, $q, $translate, _) {
     var vm = this;
+    vm.keyword = '';
+
+    vm.gotoSearch = function() {
+      if (!vm.keyword.trim()) return;
+      $state.go('admin.workspace.library.content.list', {
+        keyword: vm.keyword
+      });
+    };
+
     vm.createMediaItem = createMediaItem;
     vm.remove = remove;
     vm.finishEditLibTree = finishEditLibTree;
@@ -18,13 +27,25 @@
       vm.nodeList = treeUtils.buildGroupListInOrder(vm.nodes);
     });
 
-    vm.allMedias = LibraryMediaService.query(function() {
-      vm.allMedias = _.filter(vm.allMedias, function(m) {
-        return m.published;
-      });
+    if ($stateParams.keyword && $stateParams.keyword.length) {
+      vm.allMedias = LibraryMediaService.byKeyword({
+        keyword: $stateParams.keyword
+      }, function () {
+        vm.allMedias = _.filter(vm.allMedias, function (m) {
+          return m.published;
+        });
 
-      vm.medium = vm.allMedias;
-    });
+        vm.medium = _.sortBy(vm.allMedias, '-created');
+      });
+    } else {
+      vm.allMedias = LibraryMediaService.query(function() {
+        vm.allMedias = _.filter(vm.allMedias, function(m) {
+          return m.published;
+        });
+
+        vm.medium = _.sortBy(vm.allMedias, '-created');
+      });
+    }
 
     vm.getAllMedias = function() {
       vm.group = '';

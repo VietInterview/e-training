@@ -34,6 +34,14 @@
               key: 'all',
               id: null,
               children: tree
+            }, {
+              title: 'Chưa phân loại',
+              expanded: true,
+              folder: false,
+              key: 'uncategorized',
+              id: 'nonegroup',
+              _id: 'nonegroup',
+              children: false
             }]; // Add select all checkbox
           if (scope.initial) {
             var selectNode = treeUtils.findGroupNode(tree, scope.initial);
