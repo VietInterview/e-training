@@ -28,7 +28,8 @@ var _ = require('lodash'),
   webdriver_standalone = require('gulp-protractor').webdriver_standalone,
   del = require('del'),
   KarmaServer = require('karma').Server,
-  lesshint = require('gulp-lesshint');
+  lesshint = require('gulp-lesshint'),
+  uglify = require('gulp-uglify');
 
 // Local settings
 var changedTestFiles = [];
@@ -271,7 +272,7 @@ gulp.task('uglify', function() {
   return gulp.src(assets)
     .pipe(plugins.ngAnnotate())
     .pipe(plugins.uglify({
-      mangle: false
+      mangle: true
     }))
     .pipe(plugins.concat('application.min.js'))
     .pipe(plugins.rev())
@@ -287,6 +288,7 @@ gulp.task('uglify-vendor', function() {
     .pipe(plugins.ngAnnotate())
     .pipe(plugins.concat('vendor.min.js'))
     .pipe(plugins.rev())
+    .pipe(uglify())
     .pipe(gulp.dest('public/dist'));
 });
 
@@ -296,6 +298,13 @@ gulp.task('cssmin-vendor', function() {
     .pipe(plugins.csso())
     .pipe(plugins.concat('vendor.min.css'))
     .pipe(plugins.rev())
+    .pipe(gulp.dest('public/dist'));
+});
+
+gulp.task('html-minify', function() {
+  var htmlmin = require('gulp-htmlmin');
+  return gulp.src('src/client/**/*.html')
+    .pipe(htmlmin({collapseWhitespace: true}))
     .pipe(gulp.dest('public/dist'));
 });
 

@@ -1,7 +1,7 @@
 
 <div class="md-card ">
 	<div class="md-card-content">
-		<div class="uk-grid uk-margin-large-bottom">
+		<div class="uk-grid">
 			<div class="uk-width-large-1-4">
 				<div class="md-card">
 					<div class="md-card-toolbar">
@@ -9,8 +9,8 @@
 						<h3 class="md-card-toolbar-heading-text large">
 							{{vm.course.name}}</h3>
 					</div>
-					<div class="md-card-content">
-						<ul class="uk-nav">
+					<div class="md-card-content nice-scroll" style="max-height: 340px;overflow-y: scroll;">
+						<ul class="uk-nav" id="lessons-list">
 							<li ng-repeat="node in vm.nodes">
 								<span class="sub-heading">
 									<i ng-show="!node.expand" ng-click="vm.expand(node)"
@@ -18,10 +18,10 @@
 									<i ng-show="node.expand" ng-click="vm.collapse(node)"
 									class="md-icon material-icons md-18">arrow_drop_up</i>
 									<a ng-click="vm.toggleExpand(node)"
-									ng-class="{'uk-text-muted':node.id!=vm.selectedNode.id,'uk-text-bold uk-text-italic':node.id==vm.selectedNode.id}">
+									ng-class="{'uk-text-muted':node.id!=vm.selectedNode.id}">
 										<i class="md-icon material-icons md-18"
 										ng-class="{'uk-text-primary':node.id==vm.selectedNode.id}">folder_open</i>
-										<span class="uk-text-large">{{$index+1}}. {{node.data.name}}</span>
+										<span class="uk-text-bold">{{$index+1}}. {{node.data.name}}</span>
 									</a>
 								</span>
 								<div ng-include="'subList'"></div>
@@ -34,20 +34,21 @@
 				<div class="md-card" ng-show="vm.selectedContentNode">
 					<div class="md-card-toolbar" style="min-height: 48px; height: initial;">
 						<div class="md-card-toolbar-actions" style="width: 220px;">
-							<a ng-click="vm.nextSection()"
-								class="md-btn md-btn-small md-btn-flat md-btn-flat-primary">
-								<i class="uk-icon-arrow-right "></i> {{'ACTION.NEXT'|translate}}
-							</a>
 							<a ng-click="vm.prevSection()"
 								class="md-btn md-btn-small md-btn-flat md-btn-flat-primary"><i
 								class="uk-icon-arrow-left"></i> {{'ACTION.PREV'|translate}}
 							</a>
-						</div>
-						<h3 class="md-card-toolbar-heading-text large" style="width: calc(100% - 225px); min-height: 48px; line-height: 30px; height: initial;">
+              <a ng-click="vm.nextSection()"
+                 class="md-btn md-btn-small md-btn-flat md-btn-flat-primary">
+                {{'ACTION.NEXT'|translate}}
+                <i class="uk-icon-arrow-right "></i>
+              </a>
+            </div>
+						<h3 class="md-card-toolbar-heading-text large workspace-lms-courses-outline-preview">
 							<span>{{vm.selectedContentNode.title}} </span>
 						</h3>
 					</div>
-					<div class="md-card-content">
+					<div class="md-card-content nice-scroll" style="max-height: 340px;overflow: scroll;position: relative;">
 						<ui-view></ui-view>
 					</div>
 				</div>
@@ -64,7 +65,7 @@
 			<span class="sub-heading">
 				<i ng-show="!node.expand" ng-click="vm.expand(node)" class="md-icon material-icons md-18">arrow_drop_down</i>
 				<i ng-show="node.expand" ng-click="vm.collapse(node)"  class="md-icon material-icons md-18">arrow_drop_up</i>
-				<a ng-click="vm.toggleExpand(node)" ng-class="{'uk-text-muted':node.id!=vm.selectedNode.id,'uk-text-bold uk-text-italic':node.id==vm.selectedNode.id}">
+				<a ng-click="vm.toggleExpand(node)" ng-class="{'uk-text-muted':node.id!=vm.selectedNode.id}">
                 	<i ng-if="!node.data.hasContent" ng-class="{'uk-text-primary':node.id==vm.selectedNode.id}" class="md-icon material-icons md-18">folder_open</i>
 					<i ng-if="node.data.hasContent && node.data.contentType=='html'" class="md-icon material-icons md-18" ng-class="{'uk-text-primary':node.id==vm.selectedNode.id}">note</i>
 					<i ng-if="node.data.hasContent && node.data.contentType=='scorm'" class="md-icon material-icons md-18" ng-class="{'uk-text-primary':node.id==vm.selectedNode.id}">note</i>

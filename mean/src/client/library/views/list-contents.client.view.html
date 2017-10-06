@@ -28,7 +28,7 @@
 									</a>
 								</span>
 							</li>
-							<li ng-repeat="node in vm.nodes" ng-style="vm.group == node.data._id ? {'background-color': 'skyblue '}:''">
+							<li ng-repeat="node in vm.nodes" ng-style="vm.group == node.data._id ? {'background-color': '#dedede '}:''">
 								<span class="sub-heading">
 									<i ng-show="!node.expand" ng-click="vm.expand(node)" class="md-icon material-icons md-18">arrow_drop_down</i>
 									<i ng-show="node.expand" ng-click="vm.collapse(node)" class="md-icon material-icons md-18">arrow_drop_up</i>
@@ -62,12 +62,25 @@
 				<div class="md-card" ng-show="!vm.editMode">
 					<div class="md-card-content">
 						<div class="uk-margin">
-							<a
-								class="md-btn md-btn-default md-btn-wave-light md-btn-icon uk-margin-right  "
-								ng-click="vm.createMediaItem()"> <i
-								class="uk-icon-plus uk-text-success"></i>
-								{{'ACTION.CREATE_CONTENT' | translate}}
-							</a>
+							<div class="uk-grid">
+								<div class="uk-width-medium-1-3">
+									<a
+										class="md-btn md-btn-default md-btn-wave-light md-btn-icon uk-margin-right  "
+										ng-click="vm.createMediaItem()"> <i
+										class="uk-icon-plus uk-text-success"></i>
+										{{'ACTION.CREATE_CONTENT' | translate}}
+									</a>
+								</div>
+								<div class="uk-width-medium-2-3">
+									<div class="search-box">
+										<a class="uk-icon-hover uk-icon-search uk-align-right vi-btn-search"
+											 ng-click="vm.gotoSearch()"></a>
+										<input type="text" placeholder="{{'MODEL.MATERIAL.NAME' | translate}}" class="uk-align-right"
+													 ng-model="vm.keyword"
+													 ng-keypress="(($event.which === 13) || ($event.keyCode === 13))&& vm.gotoSearch()">
+									</div>
+								</div>
+							</div>
 							<!-- <div class="uk-button-dropdown" data-uk-dropdown="{mode:'click'}">
                 <button class="md-btn md-btn-icon"><i class="material-icons">info_outline</i>
                   {{'PAGE.LIBRARY.CONTENT.VIEW_MODE'|translate}} <i class="material-icons">&#xE313;</i></button>
@@ -133,7 +146,7 @@
 
 <script type="text/ng-template" id="subList">
   <ul class="uk-nav" ng-show="node.expand">
-    <li ng-repeat="node in node.children" ng-style="vm.group == node.data._id ? {'background-color': 'skyblue '}:''">
+    <li ng-repeat="node in node.children" ng-style="vm.group == node.data._id ? {'background-color': '#dedede '}:''">
       <span class="sub-heading">
         <i ng-show="!node.expand" ng-click="vm.expand(node)" class="md-icon material-icons md-18">arrow_drop_down</i>
         <i ng-show="node.expand" ng-click="vm.collapse(node)"

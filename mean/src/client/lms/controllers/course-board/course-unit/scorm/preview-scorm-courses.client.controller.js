@@ -17,6 +17,12 @@
         scormId: vm.section.scorm
       }, function() {
         vm.scorm.packageUrl = $sce.trustAsResourceUrl(vm.scorm.packageUrl);
+        $('iframe#packageUrl').load(function() {
+          setTimeout(function () {
+            var frame = $('iframe#packageUrl').contents();
+            $(frame).find('#preso').append('<style>* {max-width:100%!important;max-height:100%!important;}</style>');
+          }, 800);
+        });
       });
     }
 

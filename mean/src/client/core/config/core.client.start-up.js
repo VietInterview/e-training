@@ -14,7 +14,7 @@
       plugins: [
         'advlist autolink lists link image charmap print preview anchor',
         'searchreplace visualblocks code fullscreen',
-        'insertdatetime media mediaembed table contextmenu paste'
+        'insertdatetime media table contextmenu paste'
       ],
       media_live_embeds: true,
       relative_urls : false,
@@ -101,6 +101,12 @@
 
     // wave effects
     $window.Waves.init();
+
+    $rootScope.$on("$locationChangeStart", function(event, next, current) {
+      document.getElementsByClassName("uk-open")[0].classList.remove("uk-open");
+      document.getElementsByClassName("uk-dropdown-active")[0].classList.remove("uk-dropdown-active");
+      document.getElementsByClassName("uk-dropdown-shown")[0].classList.remove("uk-dropdown-shown");
+    });
 
   }
 }(window.tinymce, window.FastClick));

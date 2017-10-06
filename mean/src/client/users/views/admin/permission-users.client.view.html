@@ -29,12 +29,17 @@
 			<div class="uk-width-1-1" ng-show="!vm.editMode">
 				<div class="md-card">
 					<div class="md-card-toolbar">
-						<div class="md-card-toolbar-actions">
-
-							<a class="md-btn  md-btn-icon md-btn-wave-light"
-								href='#view_permission' data-uk-modal="{ center:true }">{{'PAGE.USERS.PERMISSION.VIEW_PERMISSION'|translate}}</a>
-							<a class="md-btn  md-btn-icon md-btn-wave-light"
-								href='#api_permission' data-uk-modal="{ center:true }">{{'PAGE.USERS.PERMISSION.API_PERMISSION'|translate}}</a>
+						<div class="md-card-toolbar-actions" style="margin-top: -3px;">
+							<label>
+								<input type="search" class="md-input" placeholder="Search:" ng-model="vm.search"
+                       ng-keyup="$event.keyCode == 13 && vm.doSearchUser()"/>
+							</label>
+						</div>
+						<div class="action-button" style="float: right;margin-right: 20px;margin-top: 7px;">
+							<a class="md-btn btn-small md-btn-icon md-btn-wave-light"
+								 href='#view_permission' data-uk-modal="{ center:true }">{{'PAGE.USERS.PERMISSION.VIEW_PERMISSION'|translate}}</a>
+							<a class="md-btn btn-small md-btn-icon md-btn-wave-light"
+								 href='#api_permission' data-uk-modal="{ center:true }">{{'PAGE.USERS.PERMISSION.API_PERMISSION'|translate}}</a>
 						</div>
 						<h3 class="md-card-toolbar-heading-text uk-text-upper">
 							{{'PAGE.USERS.USER_LIST' | translate}}</h3>
@@ -46,35 +51,28 @@
 						<thead>
 							<tr>
 								<th class="uk-text-center uk-text-upper">{{'MODEL.USER.DISPLAY_NAME'|translate}}</th>
-								<th class="uk-text-center uk-text-upper">{{'MODEL.USER.ROLE'|translate}}</th>
 								<th class="uk-text-center uk-text-upper">{{'MODEL.USER.PERMISSION_VIEW'|translate}}</th>
 								<th class="uk-text-center uk-text-upper">{{'MODEL.USER.PERMISSION_API'|translate}}</th>
-								<th class="uk-text-center uk-text-upper"></th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr ng-repeat="user in vm.users"  ng-mouseout="user.mouseOver=false" ng-mouseover="user.mouseOver=true">
-								<td class="uk-text-center">{{user.displayName}}</td>
-								<td class="uk-text-center">
-									<selectize
-								config="vm.roleSwitcherConfig" position="bottom"
-								options="vm.roleSwitcherOptions" ng-model="user.roles"
-								name="user_edit_role"></selectize>
-								</td>
+								<td class="uk-text-center" style="line-height: 42px;">{{user.displayName}}</td>
 								<td class="uk-text-center">
 								<selectize
 								config="vm.permissionViewConfig" position="bottom"
 								options="vm.permissionViewOptions" ng-model="user.permissionView"
+								class="no-border"
+								ng-change="vm.save(user)"
 								name="view_edit_role"></selectize>
 								</td>
 								<td class="uk-text-center">
 								<selectize
 								config="vm.permissionApiConfig" position="bottom"
 								options="vm.permissionApiOptions" ng-model="user.permissionApi"
+								class="no-border"
+								ng-change="vm.save(user)"
 								name="api_edit_role"></selectize>
-								</td>
-								<td class="uk-text-center">
-									<a ng-show="user.mouseOver" class="md-btn md-btn-primary md-btn-mini md-btn-wave-light" ng-click="vm.save(user)">{{'ACTION.SAVE'|translate}}</a>
 								</td>
 							</tr>
 						</tbody>
@@ -88,7 +86,7 @@
 </div>
 
 <div class="uk-modal" id="view_permission">
-    <div class="uk-modal-dialog uk-modal-dialog-large">
+    <div class="uk-modal-dialog">
 
     	<div class=" uk-text-center ">
 			<h3 class="heading_b ">{{'DIALOG.SELECT_MENU_PERMISSION.TITLE' |
@@ -140,7 +138,7 @@
 </div>
 
 <div class="uk-modal" id="api_permission">
-    <div class="uk-modal-dialog uk-modal-dialog-large">
+    <div class="uk-modal-dialog">
 
     	<div class=" uk-text-center ">
 			<h3 class="heading_b ">{{'DIALOG.SELECT_API_PERMISSION.TITLE' |
@@ -173,35 +171,76 @@
                 <input type="text" class="md-input" ng-model="vm.permissionApi.name" id="permission_title" name="permission_title" md-input/>
             </div>
            <div class="uk-margin-medium-bottom">
-           <table
-						class="uk-table uk-table-hover uk-table-nowrap uk-table-condensed">
-						<thead>
-							<tr>
-								<th class="uk-text-center uk-text-upper">{{'MODEL.PERMISSION_API.NAME'|translate}}</th>
-								<th class="uk-text-center uk-text-upper">{{'COMMON.ENDPOINT_ACCESS.VIEW'|translate}}</th>
-								<th class="uk-text-center uk-text-upper">{{'COMMON.ENDPOINT_ACCESS.CREATE'|translate}}</th>
-								<th class="uk-text-center uk-text-upper">{{'COMMON.ENDPOINT_ACCESS.UPDATE'|translate}}</th>
-								<th class="uk-text-center uk-text-upper">{{'COMMON.ENDPOINT_ACCESS.DELETE'|translate}}</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr ng-repeat="endpoint in vm.endpoints | orderBy:'name'" >
-								<td class="uk-text-center">{{endpoint.name | translate}}</td>
-								<td class="uk-text-center">
-									<input 	type="checkbox" icheck ng-model='endpoint.view'>
-								</td>
-								<td class="uk-text-center">
-									<input 	type="checkbox" icheck ng-model='endpoint.create'>
-								</td>
-								<td class="uk-text-center">
-									<input 	type="checkbox" icheck ng-model='endpoint.update'>
-								</td>
-								<td class="uk-text-center">
-									<input 	type="checkbox" icheck ng-model='endpoint.delete'>
-								</td>
-							</tr>
-						</tbody>
-					</table>
+
+						 <ul class="uk-tab" data-uk-tab="{connect:'#permissionApi'}">
+							 <li><a href="">Quản lý hệ thống</a></li>
+							 <li><a href="">Quản lý khóa học</a></li>
+						 </ul>
+
+						 <ul id="permissionApi" class="uk-switcher" style="max-height: 400px;overflow-y:scroll;">
+							 <li>
+								 <table
+									 class="uk-table uk-table-hover uk-table-nowrap uk-table-condensed">
+									 <thead>
+									 <tr>
+										 <th class="uk-text-center uk-text-upper">{{'MODEL.PERMISSION_API.NAME'|translate}}</th>
+										 <th class="uk-text-center uk-text-upper">{{'COMMON.ENDPOINT_ACCESS.VIEW'|translate}}</th>
+										 <th class="uk-text-center uk-text-upper">{{'COMMON.ENDPOINT_ACCESS.CREATE'|translate}}</th>
+										 <th class="uk-text-center uk-text-upper">{{'COMMON.ENDPOINT_ACCESS.UPDATE'|translate}}</th>
+										 <th class="uk-text-center uk-text-upper">{{'COMMON.ENDPOINT_ACCESS.DELETE'|translate}}</th>
+									 </tr>
+									 </thead>
+									 <tbody>
+									 <tr ng-repeat="endpoint in vm.endpointsSystem | orderBy:'name'">
+										 <td class="uk-text-left">{{endpoint.name | translate}}</td>
+										 <td class="uk-text-center">
+											 <input 	type="checkbox" icheck ng-model='endpoint.view'>
+										 </td>
+										 <td class="uk-text-center">
+											 <input 	type="checkbox" icheck ng-model='endpoint.create'>
+										 </td>
+										 <td class="uk-text-center">
+											 <input 	type="checkbox" icheck ng-model='endpoint.update'>
+										 </td>
+										 <td class="uk-text-center">
+											 <input 	type="checkbox" icheck ng-model='endpoint.delete'>
+										 </td>
+									 </tr>
+									 </tbody>
+								 </table>
+							 </li>
+							 <li>
+								 <table
+									 class="uk-table uk-table-hover uk-table-nowrap uk-table-condensed">
+									 <thead>
+									 <tr>
+										 <th class="uk-text-center uk-text-upper">{{'MODEL.PERMISSION_API.NAME'|translate}}</th>
+										 <th class="uk-text-center uk-text-upper">{{'COMMON.ENDPOINT_ACCESS.VIEW'|translate}}</th>
+										 <th class="uk-text-center uk-text-upper">{{'COMMON.ENDPOINT_ACCESS.CREATE'|translate}}</th>
+										 <th class="uk-text-center uk-text-upper">{{'COMMON.ENDPOINT_ACCESS.UPDATE'|translate}}</th>
+										 <th class="uk-text-center uk-text-upper">{{'COMMON.ENDPOINT_ACCESS.DELETE'|translate}}</th>
+									 </tr>
+									 </thead>
+									 <tbody>
+									 <tr ng-repeat="endpoint in vm.endpointsCourse | orderBy:'name'" >
+										 <td class="uk-text-left">{{endpoint.name | translate}}</td>
+										 <td class="uk-text-center">
+											 <input 	type="checkbox" icheck ng-model='endpoint.view'>
+										 </td>
+										 <td class="uk-text-center">
+											 <input 	type="checkbox" icheck ng-model='endpoint.create'>
+										 </td>
+										 <td class="uk-text-center">
+											 <input 	type="checkbox" icheck ng-model='endpoint.update'>
+										 </td>
+										 <td class="uk-text-center">
+											 <input 	type="checkbox" icheck ng-model='endpoint.delete'>
+										 </td>
+									 </tr>
+									 </tbody>
+								 </table>
+							 </li>
+						 </ul>
 
            </div>
 

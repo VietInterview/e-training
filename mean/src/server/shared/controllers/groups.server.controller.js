@@ -169,6 +169,12 @@ exports.listByCategory = function(req, res) {
  */
 exports.groupByID = function(req, res, next, id) {
 
+  if (id === 'nonegroup') {
+    req.group = null;
+    next();
+    return;
+  }
+
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).send({
       message: 'Group is invalid'

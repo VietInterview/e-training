@@ -62,6 +62,7 @@
           }
         }
       }
+      $rootScope.menuAccordionMode = true;
     }
 
     function stateChangeSuccess(event, toState, toParams, fromState, fromParams) {
