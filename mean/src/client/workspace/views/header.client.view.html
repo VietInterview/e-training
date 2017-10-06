@@ -65,10 +65,14 @@
 								</ul>
 							</div>
 						</div></li>
-					<li data-uk-dropdown="{mode:'click',pos:'bottom-right'}"><a
-						href="#" class="user_action_image"><img class="md-user-image"
-							ng-src="{{vm.user.profileImageURL?vm.user.profileImageURL:'/assets/img/avatars/user.png'}}"
-							alt="" add-image-prop /></a>
+					<li data-uk-dropdown="{mode:'click',pos:'bottom-right'}">
+            <a href="#" class="user_action_image">
+              <img class="md-user-image"
+                   ng-src="{{vm.user.profileImageURL?vm.user.profileImageURL:'/assets/img/avatars/user.png'}}"
+                   alt="" add-image-prop />
+            </a>
+            <div class="uk-dropdown  uk-dropdown-small">
+
 						<div class="uk-dropdown  uk-dropdown-small">
 							<ul class="uk-nav js-uk-prevent uk-list-line">
 								<li><a ng-click="vm.viewProfile()"

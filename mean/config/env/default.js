@@ -23,7 +23,7 @@ var s = module.exports = {
   // Session Cookie settings
   sessionCookie: {
     // session expiration is set by default to 1 hours
-    maxAge: 1 * (60 * 60 * 1000),
+    maxAge: 24 * (60 * 60 * 1000),
     // httpOnly flag makes sure the cookie is only accessed
     // through the HTTP protocol and not JS/browser
     httpOnly: true,

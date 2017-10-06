@@ -91,7 +91,7 @@
     }
 
     function toggleExpand(node) {
-      if (vm.selectedNode !== node) {
+      if (vm.selectedNode !== node && node.children.length === 0) {
         selectNode(node);
       }
       if (node.children.length === 0)
