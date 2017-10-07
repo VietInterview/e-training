@@ -27,7 +27,7 @@
     function membersPromise() {
       return CourseMembersService.byCourse({
         courseId: vm.course._id
-      }, function() {}).$promise;
+      }, function(sections) {}).$promise;
     }
 
     membersPromise().then(function(members) {
