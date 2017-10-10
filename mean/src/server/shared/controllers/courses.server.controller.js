@@ -219,6 +219,11 @@ exports.courseByID = function(req, res, next, id) {
     });
 };
 
+exports.copyCourse = function (req, res) {
+  console.log('req: ', JSON.stringify(req));
+
+};
+
 
 /**
  * Update course logo

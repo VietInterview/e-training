@@ -20,6 +20,10 @@
         method: 'POST',
         transformRequest: _transform.unpopulate
       },
+      copy: {
+        method: 'POST',
+        transformRequest: _transform.unpopulate
+      },
       byGroup: {
         method: 'GET',
         isArray: true,
