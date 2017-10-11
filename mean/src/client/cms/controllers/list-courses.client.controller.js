@@ -108,7 +108,9 @@
       UIkit.modal.confirm($translate.instant('COMMON.CONFIRM_PROMPT'), function() {
         Upload.upload({
           url: '/api/courses/' + course_id + '/copy'
-        }).then(function(response) {
+        }).then(function() {
+          vm.reload = true;
+          vm.dtInstance.reloadData(function() {}, true);
           Notification.success({
             message: '<i class="uk-icon-check"></i> Course copied successfully!'
           });
