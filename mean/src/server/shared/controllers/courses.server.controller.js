@@ -220,8 +220,33 @@ exports.courseByID = function(req, res, next, id) {
 };
 
 exports.copyCourse = function (req, res) {
-  console.log('req: ', JSON.stringify(req));
+  var course = req.course;
+  course._id = mongoose.Types.ObjectId();
+  course.name = course.name + ' - Copy 2';
+  course.code = course.code + '.CP';
+  course.user = req.user;
+  course.isNew = true;
 
+  course.save(function(err) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      var edition = new CourseEdition();
+      edition.course = course._id;
+      edition.name = 'v1.0';
+      edition.primary = true;
+      edition.save(function(err) {
+        if (err) {
+          return res.status(400).send({
+            message: errorHandler.getErrorMessage(err)
+          });
+        } else
+          res.jsonp(course);
+      });
+    }
+  });
 };
 
 
