@@ -354,6 +354,7 @@
 	"ACTION.HAND_DOWN": "Hạ tay",
 	"ACTION.DISCONNECT": "Kết thúc cuộc gọi",
 	"ACTION.CONNECT": "Kết nối",
+  "ACTION.COPY": "Sao chép",
 	"ACTION.SIGN_IN": "Đăng nhập",
 	"ACTION.SELECT": "Chọn",
 	"ACTION.SIGN_UP": "Đăng ký",

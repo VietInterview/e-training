@@ -34,6 +34,10 @@ exports.invokeRolesPolicies = function() {
           permissions: '*'
         },
         {
+          resources: '/api/courses/:courseId/copy',
+          permissions: '*'
+        },
+        {
           resources: '/api/courses/public',
           permissions: ['get']
         },

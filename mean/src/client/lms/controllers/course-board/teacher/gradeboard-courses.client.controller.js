@@ -17,6 +17,7 @@
     vm.user = user;
     vm.gradescheme = gradescheme;
     vm.scoreMap = {};
+    var memberCount = 0;
 
     function examPromise() {
       return EditionSectionsService.byEdition({
@@ -80,13 +81,14 @@
               totalScore: scores.totalPercent,
               scores: scores.scores
             };
-
-            curr.totalScore = scores.totalPercent;
-
-            vm.members = _.sortBy(vm.members, function (member) {
-              return member.totalScore * -1;
-            });
-
+            curr.totalScore = scores.scores[0].rawPercent;
+            memberCount++;
+            if (memberCount === vm.members.length) {
+              vm.members = _.sortBy(vm.members, function (member) {
+                return member.totalScore * -1;
+              });
+              console.log(vm.members);
+            }
           });
         });
       }, $q.resolve()).then(function() { // Export to csv file
