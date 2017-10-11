@@ -51,6 +51,10 @@
       vm.endpointsCourse = _.filter(vm.endpoints, function (endpoint) {
         return endpointsCoursePrefix.indexOf(endpoint.prefix) > -1;
       });
+      vm.endpointsOther = _.filter(vm.endpoints, function (endpoint) {
+        return endpointsCoursePrefix.indexOf(endpoint.prefix) === -1
+          && endpointsSystemPrefix.indexOf(endpoint.prefix) === -1;
+      });
     });
 
     vm.doSearchUser = function () {
