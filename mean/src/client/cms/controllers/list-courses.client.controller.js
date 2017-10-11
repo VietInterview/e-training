@@ -26,7 +26,7 @@
         {
           extend: 'colvis',
           text: '<i class="uk-icon-file-pdf-o"></i> ' + $translate.instant('ACTION.COLUMN'),
-          titleAttr: 'COL'
+          titleAttr: 'COL',
         }
       ]);
 
@@ -37,7 +37,7 @@
         }),
       DTColumnBuilder.newColumn('name').withTitle($translate.instant('MODEL.COURSE.NAME')).withClass('withfix'),
       DTColumnBuilder.newColumn('code').withTitle($translate.instant('MODEL.COURSE.CODE')),
-      DTColumnBuilder.newColumn(null).withTitle($translate.instant('MODEL.COURSE.DIFFICULTY'))
+      DTColumnBuilder.newColumn(null).withTitle($translate.instant('MODEL.COURSE.DIFFICULTY')).notVisible()
         .renderWith(function(data, type, full, meta) {
           if (data.level === 'easy')
             return $translate.instant('COMMON.DIFFICULTY.EASY');
@@ -86,11 +86,11 @@
       DTColumnBuilder.newColumn(null).withTitle($translate.instant('MODEL.COURSE.STATUS'))
         .renderWith(function(data, type, full, meta) {
           if (data.status === 'available')
-            return '<span class="uk-badge uk-badge-success">Available</span>';
+            return '<span class="uk-badge uk-badge-success">Đang hoạt động </span>';
           if (data.status === 'draft')
             return '<span class="uk-badge uk-badge-default">Draft</span>';
           if (data.status === 'unavailable')
-            return '<span class="uk-badge uk-badge-danger">N/A</span>';
+            return '<span class="uk-badge uk-badge-danger">Đã hết hạn</span>';
         }),
       DTColumnBuilder.newColumn(null).withTitle($translate.instant('COMMON.ACTION')).notSortable()
         .renderWith(function(data, type, full, meta) {
