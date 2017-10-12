@@ -28,6 +28,7 @@
           extend: 'colvis',
           text: '<i class="uk-icon-file-pdf-o"></i> ' + $translate.instant('ACTION.COLUMN'),
           titleAttr: 'COL',
+            className:'modal'
         }
       ]);
 
