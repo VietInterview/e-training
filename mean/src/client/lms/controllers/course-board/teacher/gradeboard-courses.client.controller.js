@@ -18,6 +18,7 @@
     vm.gradescheme = gradescheme;
     vm.scoreMap = {};
     var memberCount = 0;
+    vm.loading = true;
 
     function examPromise() {
       return EditionSectionsService.byEdition({
@@ -90,6 +91,7 @@
               }).sortBy(function(member) {
                 return member.totalScore * -1;
               }).value();
+              vm.loading = false;
             }
           });
         });
