@@ -17,6 +17,7 @@
     function generateReport(users) {
       vm.members = [];
       var tmpMembers = [];
+        vm.loading = true;
       _.each(users, function(user) {
         CourseMembersService.byUser({
           userId: user._id
@@ -27,6 +28,7 @@
           _.each(members, function(member) {
             member.time = 0;
             member.score = 0;
+
             AttemptsService.byMember({
               memberId: member._id
             }, function(attempts) {
@@ -50,6 +52,7 @@
             // Convert object to array
             Object.keys(vm.members).map(function (key) { return vm.members[key]; });
           });
+          vm.loading = false;
         });
       });
     }

@@ -1,5 +1,70 @@
+<style>
+	.loading {
+		background-color: rgba(0, 0, 0, 0.71);
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: 100%;
+		z-index: 99999;
+	}
+	.loading-message {
+		color: #fff;
+		text-align: center;
+		margin-top: 20%;
+		font-size: 20px;
+	}
+	.loading-message span {
+		margin-left: 12px;
+	}
+
+	.spinner {
+		animation: rotator 1.4s linear infinite;
+	}
+
+	@keyframes rotator {
+		0% { transform: rotate(0deg); }
+		100% { transform: rotate(270deg); }
+	}
+
+	.path {
+		stroke-dasharray: 187;
+		stroke-dashoffset: 0;
+		transform-origin: center;
+		animation:
+		dash 1.4s ease-in-out infinite,
+		colors (1.4s*4) ease-in-out infinite;
+	}
+
+	@keyframes colors {
+		0% { stroke: #4285F4; }
+		25% { stroke: #DE3E35; }
+		50% { stroke: #F7C223; }
+		75% { stroke: #1B9A59; }
+		100% { stroke: #4285F4; }
+	}
+
+	@keyframes dash {
+		0% { stroke-dashoffset: 187; }
+		50% {
+			stroke-dashoffset: 187/4;
+			transform:rotate(135deg);
+		}
+		100% {
+			stroke-dashoffset: 187;
+			transform:rotate(450deg);
+		}
+</style>
 <div id="page_content">
-	<div id="page_content_inner">
+	<div id="page_content_inner"  style="position: relative;">
+		<div class="loading" ng-show="vm.loading">
+			<div class="loading-message">
+				<svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+					<circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+				</svg>
+				<span>Đang xu ly bao cao</span>
+			</div>
+		</div>
 		<h3 class="heading_b uk-margin-bottom">{{'PAGE.REPORTS.COURSE_BY_MEMBER.TITLE'
 			| translate}}</h3>
 		<div class="uk-grid" data-uk-grid-margin>
