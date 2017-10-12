@@ -82,12 +82,14 @@
               scores: scores.scores
             };
             curr.totalScore = scores.scores[0].rawPercent;
+            curr.timeStart = parseInt(scores.scores[0].timeStart);
             memberCount++;
             if (memberCount === vm.members.length) {
-              vm.members = _.sortBy(vm.members, function (member) {
+              vm.members = _(vm.members).chain().sortBy(function(member) {
+                return member.timeStart || Infinity;
+              }).sortBy(function(member) {
                 return member.totalScore * -1;
-              });
-              console.log(vm.members);
+              }).value();
             }
           });
         });
