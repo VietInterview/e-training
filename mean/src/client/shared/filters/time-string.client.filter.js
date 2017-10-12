@@ -11,7 +11,7 @@
         var hh = Math.floor(secs / 3600);
         var mm = Math.floor((secs - hh * 3600) / 60);
         var ss = Math.floor(secs - hh * 3600 - mm * 60);
-        return pad(hh) + 'hr : ' + pad(mm) + 'm : ' + pad(ss) + 's';
+        return pad(hh) + ':' + pad(mm) + ':' + pad(ss);
       };
     });
 }());
