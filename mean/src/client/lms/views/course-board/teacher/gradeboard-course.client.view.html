@@ -17,7 +17,15 @@
 <div id="page_content">
   <div id="page_content_inner">
     <div class="md-card gradeboard-cource">
-      <div class="content-table-gradebook md-card-content">
+      <div class="content-table-gradebook md-card-content" style="position: relative;">
+        <div class="loading" ng-show="vm.loading">
+          <div class="loading-message">
+            <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+              <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+            </svg>
+            <span>Đang tính toán điểm...</span>
+          </div>
+        </div>
         <h3 class="md-card-toolbar-heading-text large">
           {{"PAGE.LMS.MY_COURSES.COURSE_GRADE.QUIZ_INFO" | translate}}
         </h3>

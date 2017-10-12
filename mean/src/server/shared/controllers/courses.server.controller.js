@@ -11,7 +11,12 @@ var path = require('path'),
     multer = require('multer'),
     config = require(path.resolve('./config/config')),
     Course = mongoose.model('Course'),
-    CourseEdition = mongoose.model('CourseEdition');
+    CourseEdition = mongoose.model('CourseEdition'),
+    EditionSection = mongoose.model('EditionSection'),
+    Html = mongoose.model('Html'),
+    Video = mongoose.model('Video'),
+    Exam = mongoose.model('Exam'),
+    Exercise = mongoose.model('Exercise');
 var office2html = require('office2html'),
     generateHtml = office2html.generateHtml;
 var pdftohtml = require('pdftohtmljs');
@@ -221,31 +226,60 @@ exports.courseByID = function(req, res, next, id) {
 
 exports.copyCourse = function (req, res) {
   var course = req.course;
-  course._id = mongoose.Types.ObjectId();
-  course.name = course.name + ' - Copy 2';
-  course.code = course.code + '.CP';
-  course.user = req.user;
-  course.isNew = true;
 
-  course.save(function(err) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    } else {
-      var edition = new CourseEdition();
-      edition.course = course._id;
-      edition.name = 'v1.0';
-      edition.primary = true;
-      edition.save(function(err) {
+  CourseEdition.findOne({
+    course: course
+  }).exec(function(err, edition) {
+    EditionSection.find({
+      edition: edition._id
+    }).exec(function(err, sections) {
+
+      course._id = mongoose.Types.ObjectId();
+      course.name = course.name + ' - Copy';
+      course.code = course.code + '.CP';
+      course.user = req.user;
+      course.isNew = true;
+      course.save(function(err) {
         if (err) {
           return res.status(400).send({
             message: errorHandler.getErrorMessage(err)
           });
-        } else
-          res.jsonp(course);
+        } else {
+          var edition = new CourseEdition();
+          edition.course = course._id;
+          edition.name = 'v1.0';
+          edition.primary = true;
+          edition.save(function(err) {
+            if (err) {
+              return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+              });
+            } else {
+              var currentParentId;
+              sections.forEach(function (section) {
+                section.edition = edition._id;
+                section._id = mongoose.Types.ObjectId();
+                section.isNew = true;
+                if (!section.parent) {
+                  currentParentId = section._id;
+                }
+                if (section.parent) {
+                  console.log(currentParentId);
+                  section.parent = currentParentId;
+                }
+                section.save(function (err) {
+                  if (err) {
+                    console.log(err);
+                  }
+                });
+              });
+
+              res.jsonp(course);
+            }
+          });
+        }
       });
-    }
+    });
   });
 };
 

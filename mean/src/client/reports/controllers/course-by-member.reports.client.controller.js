@@ -41,7 +41,7 @@
               member.time = time;
             });
             courseUtils.memberScoreByCourse(member, member.edition).then(function(score) {
-              member.score = score.totalPercent;
+              member.score = score.scores[0].rawPercent;
             });
             tmpMembers.push(member);
             vm.members = _.groupBy(tmpMembers, function (member) {
