@@ -13,9 +13,12 @@
     vm.generateReport = generateReport;
     // vm.getExportData = getExportData;
     // vm.getExportHeader = getExportHeader;
+    vm.loading = false;
 
     function generateReport(users) {
+      vm.loading = true;
       vm.members = [];
+      var i = 0;
       var tmpMembers = [];
         vm.loading = true;
       _.each(users, function(user) {
@@ -43,7 +46,13 @@
               member.time = time;
             });
             courseUtils.memberScoreByCourse(member, member.edition).then(function(score) {
-              member.score = score.totalPercent;
+              if (score.scores.length) {
+                member.score = score.scores[0].rawPercent;
+              }
+              i++;
+              if (i === users.length * members.length) {
+                vm.loading = false;
+              }
             });
             tmpMembers.push(member);
             vm.members = _.groupBy(tmpMembers, function (member) {
