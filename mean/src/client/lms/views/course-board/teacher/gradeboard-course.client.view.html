@@ -86,7 +86,7 @@
                 </td>
                 <td class="uk-text-center" ng-repeat="score in vm.scoreMap[member._id].scores"
                 ng-if="vm.scoreMap[member._id].scores.length">
-                  {{score.rawPercent}}<span ng-show="score.timeStart" style="color: green"> ({{score.timeStart}}s)</span>
+                  {{score.rawPercent}}<span ng-show="score.timeStart" style="color: green"> ({{score.timeStart}})</span>
                 </td>
                 <td class="uk-text-center" ng-if="!vm.scoreMap[member._id].scores.length">
                   0
@@ -127,7 +127,7 @@
               <td class="uk-text-center">{{member.member.displayName}}</td>
               <td class="uk-text-center" ng-repeat="score in vm.scoreMap[member._id].scores"
               ng-if="vm.scoreMap[member._id].scores.length">
-                {{score.rawPercent}}
+                {{score.rawPercent}}<span ng-show="score.timeStart" style="color: green"> ({{score.timeStart}})</span>
               </td>
               <td class="uk-text-center" ng-if="!vm.scoreMap[member._id].scores.length">
                 0
