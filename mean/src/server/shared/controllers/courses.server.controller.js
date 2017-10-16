@@ -255,25 +255,36 @@ exports.copyCourse = function (req, res) {
                 message: errorHandler.getErrorMessage(err)
               });
             } else {
-              var currentParentId;
-              sections.forEach(function (section) {
-                section.edition = edition._id;
-                section._id = mongoose.Types.ObjectId();
-                section.isNew = true;
-                if (!section.parent) {
-                  currentParentId = section._id;
-                }
-                if (section.parent) {
-                  console.log(currentParentId);
-                  section.parent = currentParentId;
-                }
-                section.save(function (err) {
+              sections = _.groupBy(sections, function (section) {
+                return section.parent;
+              });
+              sections[undefined].forEach(function (rootSection) {
+                rootSection.edition = edition._id;
+                var rootSectionId = rootSection._id;
+                rootSection._id = mongoose.Types.ObjectId();
+                rootSection.isNew = true;
+                rootSection.save(function (err) {
                   if (err) {
                     console.log(err);
+                    res.status(422).send(err);
+                  } else if (sections[rootSectionId] && sections[rootSectionId] instanceof Array) {
+                    sections[rootSectionId].forEach(function (childrenSection) {
+                      if (childrenSection.parent) {
+                        childrenSection.edition = edition._id;
+                        childrenSection._id = mongoose.Types.ObjectId();
+                        childrenSection.isNew = true;
+                        childrenSection.parent = rootSection._id;
+                        childrenSection.save(function (err) {
+                          if (err) {
+                            console.log(err);
+                            res.status(422).send(err);
+                          }
+                        });
+                      }
+                    })
                   }
                 });
               });
-
               res.jsonp(course);
             }
           });
