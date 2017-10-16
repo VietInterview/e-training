@@ -91,7 +91,7 @@
                 <td class="uk-text-center" ng-if="!vm.scoreMap[member._id].scores.length">
                   0
                 </td>
-                <td class="uk-text-center">{{(vm.scoreMap[member._id].totalScore) ? vm.scoreMap[member._id].totalScore : 0}}</td>
+                <td class="uk-text-center">{{(member.totalScore) ? member.totalScore : 0}}</td>
                 <td class="uk-text-center">
                   <span ng-show="vm.scoreMap[member._id].totalScore >= vm.gradescheme.benchmark && member.enrollmentStatus=='completed'">{{"COMMON.PASS" | translate}}</span>
                   <span ng-show="vm.scoreMap[member._id].totalScore < vm.gradescheme.benchmark && member.enrollmentStatus=='completed'">{{"COMMON.FAIL" | translate}}</span>
