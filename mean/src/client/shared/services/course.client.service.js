@@ -29,7 +29,7 @@
                   } else {
                     examScore += 1;
                     answer = _.find(attempt.answers, function(obj) {
-                      return obj.question === question._id;
+                      return obj && obj.question === question._id;
                     });
                     if (answer && answer.isCorrect)
                       rawScore++;
