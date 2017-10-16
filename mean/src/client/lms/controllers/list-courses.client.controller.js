@@ -6,10 +6,10 @@
     .module('lms')
     .controller('LmsCoursesListController', LmsCoursesListController);
 
-  LmsCoursesListController.$inject = ['$scope', '$state', '$window', 'Authentication', '$timeout', 'CoursesService', 'Notification', 'GroupsService', 
+  LmsCoursesListController.$inject = ['$scope', '$state', '$window', 'Authentication', '$timeout', 'CoursesService', 'Notification', 'GroupsService',
   '$q', '_', 'treeUtils', 'userResolve', 'CourseProgramsService','$translate', '$rootScope'];
 
-  function LmsCoursesListController($scope, $state, $window, Authentication, $timeout, CoursesService, Notification, GroupsService, 
+  function LmsCoursesListController($scope, $state, $window, Authentication, $timeout, CoursesService, Notification, GroupsService,
     $q, _, treeUtils, user, CourseProgramsService, $translate, $rootScope) {
     var vm = this;
     vm.keyword = '';
@@ -109,7 +109,7 @@
       valueField: 'value',
       labelField: 'label',
       create: false,
-      placeholder: 'Choose...'
+      placeholder: $translate.instant("SELECT.ORDER_BY")
     };
     function toggleExpand(node) {
       node.data.coursesList = [];

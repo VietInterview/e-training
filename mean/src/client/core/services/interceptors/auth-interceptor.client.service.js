@@ -18,9 +18,9 @@
       if (!rejection.config.ignoreAuthModule) {
         switch (rejection.status) {
           case 400:
-            $injector.get('$state').go('error.bad-request', {
-              message: rejection.data.message
-            });
+            // $injector.get('$state').go('error.bad-request', {
+            //   message: rejection.data.message
+            // });
             break;
           case 401:
             // Deauthenticate the global user
@@ -38,7 +38,7 @@
             });
             break;
           case 500:
-            $injector.get('$state').transitionTo('error.server-error');
+            // $injector.get('$state').transitionTo('error.server-error');
             break;
           case -1: // Handle error if no response from server(Network Lost or Server not responding)
             var Notification = $injector.get('Notification');

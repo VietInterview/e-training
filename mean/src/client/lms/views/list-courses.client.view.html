@@ -23,21 +23,23 @@
                                 <h3 class="md-card-toolbar-heading-text large">
                                     {{"MODEL.COURSE.GROUP" | translate}}</h3>
                             </div>
-                            <div class="md-card-content" style="padding: 16px 0px;">
-                                <ul class="uk-nav">
-                                    <li ng-style="(!vm.group || vm.group == '') ? {'background-color': 'skyblue '}:''">
-										<span class="sub-heading">
-											<i ng-show="!node.expand" ng-click="vm.expand(node)"
-                                               class="md-icon material-icons md-18">arrow_drop_down</i>
-											<i ng-show="node.expand" ng-click="vm.collapse(node)"
-                                               class="md-icon material-icons md-18">arrow_drop_up</i>
-											<a ng-click="vm.selsetAll()" class="uk-text-muted">
-												<span class="uk-text-large">{{"COMMON.PRESENT_MODE.ALL" |
-													translate}}</span>
-											</a>
-										</span>
+                            <div class="md-card-content" style="padding: 0 0 16px 0;">
+                                <ul class="uk-nav" id="course-cats-list">
+                                    <li ng-style="(!vm.group || vm.group == '') ? {'background-color': '#dedede '}:''"
+                                        style="padding: 0 12px;">
+                                      <span class="sub-heading">
+                                        <i ng-show="!node.expand" ng-click="vm.expand(node)"
+                                                                 class="md-icon material-icons md-18">arrow_drop_down</i>
+                                        <i ng-show="node.expand" ng-click="vm.collapse(node)"
+                                                                 class="md-icon material-icons md-18">arrow_drop_up</i>
+                                        <a ng-click="vm.selsetAll()" class="uk-text-muted">
+                                          <span class="uk-text-large">{{"COMMON.PRESENT_MODE.ALL" |
+                                            translate}}</span>
+                                        </a>
+                                      </span>
                                     </li>
-                                    <li ng-style="(vm.group == 'organization') ? {'background-color': 'skyblue '}:''">
+                                    <li ng-style="(vm.group == 'organization') ? {'background-color': '#dedede '}:''"
+                                        style="padding: 0 12px;">
                                         <i class="md-icon material-icons md-18">arrow_drop_down</i>
                                         <span class="sub-heading">
                                             <a ng-click="vm.selectOrganization()" class="uk-text-muted">
@@ -47,18 +49,19 @@
                                         </span>
                                     </li>
                                     <li ng-repeat="node in vm.nodes"
-                                        ng-style="vm.group == node.data._id ? {'background-color': 'skyblue '}:''">
-										<span class="sub-heading">
-											<i ng-show="!node.expand" ng-click="vm.expand(node)"
-                                               class="md-icon material-icons md-18">arrow_drop_down</i>
-											<i ng-show="node.expand" ng-click="vm.collapse(node)"
-                                               class="md-icon material-icons md-18">arrow_drop_up</i>
-											<a ng-click="vm.toggleExpand(node)" class="uk-text-muted"> <!-- ng-class="{'':node.id!=vm.selectedNode.id,'uk-text-bold uk-text-italic':node.id==vm.selectedNode.id}" -->
-                                                <!-- <i  class="md-icon material-icons md-18" ng-class="{'uk-text-primary':node.id==vm.selectedNode.id}">folder_open</i> -->
-                                                <!-- {{$index+1}}.  --> <span
-                                                        class="uk-text-large">{{node.data.name}}</span>
-											</a>
-										</span>
+                                        ng-style="vm.group == node.data._id ? {'background-color': '#dedede '}:''"
+                                        style="padding: 0 12px;">
+                                      <span class="sub-heading">
+                                        <i ng-show="!node.expand" ng-click="vm.expand(node)"
+                                                                 class="md-icon material-icons md-18">arrow_drop_down</i>
+                                        <i ng-show="node.expand" ng-click="vm.collapse(node)"
+                                                                 class="md-icon material-icons md-18">arrow_drop_up</i>
+                                        <a ng-click="vm.toggleExpand(node)" class="uk-text-muted"> <!-- ng-class="{'':node.id!=vm.selectedNode.id,'uk-text-bold uk-text-italic':node.id==vm.selectedNode.id}" -->
+                                                                  <!-- <i  class="md-icon material-icons md-18" ng-class="{'uk-text-primary':node.id==vm.selectedNode.id}">folder_open</i> -->
+                                                                  <!-- {{$index+1}}.  --> <span
+                                                                          class="uk-text-large">{{node.data.name}}</span>
+                                        </a>
+                                      </span>
                                         <div ng-include="'subList'"></div>
                                     </li>
                                 </ul>
@@ -97,7 +100,7 @@
 <script type="text/ng-template" id="subList">
     <ul class="uk-nav" ng-show="node.expand">
         <li ng-repeat="node in node.children"
-            ng-style="vm.group == node.data._id ? {'background-color': 'skyblue '}:''">
+            ng-style="vm.group == node.data._id ? {'background-color': '#dedede '}:''">
             <span class="sub-heading">
                 <i ng-show="!node.expand" ng-click="vm.expand(node)" class="md-icon material-icons md-18">arrow_drop_down</i>
                 <i ng-show="node.expand" ng-click="vm.collapse(node)"

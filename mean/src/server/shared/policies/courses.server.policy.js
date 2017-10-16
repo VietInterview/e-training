@@ -34,6 +34,10 @@ exports.invokeRolesPolicies = function() {
           permissions: '*'
         },
         {
+          resources: '/api/courses/:courseId/copy',
+          permissions: '*'
+        },
+        {
           resources: '/api/courses/public',
           permissions: ['get']
         },
@@ -68,6 +72,10 @@ exports.invokeRolesPolicies = function() {
         },
         {
           resources: '/api/courses/:courseId/logo',
+          permissions: ['get']
+        },
+        {
+          resources: '/api/courses/:courseId/copy',
           permissions: ['get']
         },
         {
@@ -133,6 +141,10 @@ exports.invokeRolesPolicies = function() {
         },
         {
           resources: '/api/courses/:courseId/logo',
+          permissions: ['get']
+        },
+        {
+          resources: '/api/courses/:courseId/copy',
           permissions: ['get']
         },
         {

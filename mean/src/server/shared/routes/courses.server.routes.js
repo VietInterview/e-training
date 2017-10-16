@@ -29,6 +29,7 @@ module.exports = function(app) {
     .get(courses.listByGroup);
 
   app.route('/api/courses/:courseId/logo').post(courses.changeCourseLogo);
+  app.route('/api/courses/:courseId/copy').post(courses.copyCourse);
 
   app.route('/api/courses/search').all(coursesPolicy.isAllowed)
     .get(courses.listByKeyword);

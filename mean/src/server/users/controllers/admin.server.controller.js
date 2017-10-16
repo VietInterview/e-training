@@ -135,6 +135,9 @@ exports.create = function(req, res, next) {
         var baseUrl = req.app.get('domain') || httpTransport + req.headers.host;
         res.render(path.resolve('src/server/users/templates/user-registeration-welcome-email'), {
           name: user.displayName,
+          username: user.username,
+          password: "123456",
+          customer: config.app.customer,
           appName: config.app.title
         }, function(err, emailHTML) {
           done(err, emailHTML, user);
@@ -311,17 +314,31 @@ exports.list = function(req, res) {
 };
 
 exports.userByGroup = function(req, res) {
-  User.find({
-    group: req.group._id
-  }, '-salt -password -providerData').sort('-created').populate('user', 'displayName').populate('group').exec(function(err, users) {
-    if (err) {
-      return res.status(422).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    }
+  if (req.group) {
+    User.find({
+      group: req.group._id
+    }, '-salt -password -providerData').sort('-created').populate('user', 'displayName').populate('group').exec(function (err, users) {
+      if (err) {
+        return res.status(422).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      }
 
-    res.json(users);
-  });
+      res.json(users);
+    });
+  } else {
+    User.find({
+      group: { $exists: false }
+    }, '-salt -password -providerData').sort('-created').populate('user', 'displayName').populate('group').exec(function (err, users) {
+      if (err) {
+        return res.status(422).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      }
+
+      res.json(users);
+    });
+  }
 };
 
 /**

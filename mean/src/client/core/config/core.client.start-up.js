@@ -12,9 +12,10 @@
     .module('core').constant('fileManagerConfig', {
       skin_url: '/assets/skins/tinymce/material_design',
       plugins: [
-        'advlist autolink lists link image charmap print preview anchor',
-        'searchreplace visualblocks code fullscreen',
-        'insertdatetime media mediaembed table contextmenu paste'
+          "codemirror advlist autolink lists link image charmap print preview hr anchor pagebreak",
+          "searchreplace wordcount visualblocks visualchars fullscreen",
+          "insertdatetime media nonbreaking save table contextmenu directionality",
+          "emoticons template paste textcolor colorpicker textpattern imagetools code fullscreen"
       ],
       media_live_embeds: true,
       relative_urls : false,
@@ -23,7 +24,8 @@
       video_template_callback: function(data) {
         return '<iframe width="' + data.width + '" height="' + data.height + '" src="' + data.source1 + '" /></iframe>';
       },
-      toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media',
+      toolbar1: "undo redo bold italic underline strikethrough cut copy paste|  styleselect formatselect fontselect fontsizeselect ",
+      toolbar2: "   alignleft aligncenter alignright alignjustify bullist numlist outdent indent  | image media  | forecolor backcolor  ",
       file_picker_callback: function(callback, value, meta) {
         tinymce.activeEditor.windowManager.open({
           file: '/file_manager/fm_tinymce.html', // use an absolute path!
@@ -101,6 +103,12 @@
 
     // wave effects
     $window.Waves.init();
+
+    $rootScope.$on("$locationChangeStart", function(event, next, current) {
+      document.getElementsByClassName("uk-open")[0].classList.remove("uk-open");
+      document.getElementsByClassName("uk-dropdown-active")[0].classList.remove("uk-dropdown-active");
+      document.getElementsByClassName("uk-dropdown-shown")[0].classList.remove("uk-dropdown-shown");
+    });
 
   }
 }(window.tinymce, window.FastClick));
