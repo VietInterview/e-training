@@ -677,7 +677,8 @@
           memberResolve: getMember,
           editionResolve: getEdition,
           courseResolve: getCourse,
-          gradeResolve: getGradescheme
+          gradeResolve: getGradescheme,
+            subResolve: getSubmissions
         },
         data: {
           roles: ['user'],
@@ -740,7 +741,7 @@
           memberResolve: getMember,
           editionResolve: getEdition,
           courseResolve: getCourse,
-          gradeResolve: getGradescheme
+          gradeResolve: getGradescheme,
         },
         data: {
           roles: ['user'],
@@ -770,7 +771,13 @@
       courseId: $stateParams.courseId
     }).$promise;
   }
+    getSubmissions.$inject = ['$stateParams', 'SubmissionsService'];
 
+    function  getSubmissions($stateParams, SubmissionsService) {
+        return SubmissionsService.get({
+            submissionId: $stateParams.submissionId
+        }).$promise;
+    }
   getEdition.$inject = ['$stateParams', 'CourseEditionsService'];
 
   function getEdition($stateParams, CourseEditionsService) {
