@@ -105,9 +105,21 @@
     $window.Waves.init();
 
     $rootScope.$on("$locationChangeStart", function(event, next, current) {
-      document.getElementsByClassName("uk-open")[0].classList.remove("uk-open");
-      document.getElementsByClassName("uk-dropdown-active")[0].classList.remove("uk-dropdown-active");
-      document.getElementsByClassName("uk-dropdown-shown")[0].classList.remove("uk-dropdown-shown");
+      if (!document.getElementById("top_bar")) {
+        return;
+      }
+      var ukOpen = document.getElementById("top_bar").getElementsByClassName("uk-open");
+      if (ukOpen.length) {
+        ukOpen[0].classList.remove("uk-open");
+      }
+      var ukDropdownActive = document.getElementById("top_bar").getElementsByClassName("uk-dropdown-active");
+      if (ukDropdownActive.length) {
+        ukDropdownActive[0].classList.remove("uk-dropdown-active");
+      }
+      var ukDropdownShown = document.getElementById("top_bar").getElementsByClassName("uk-dropdown-shown");
+      if (ukDropdownShown.length) {
+        ukDropdownShown[0].classList.remove("uk-dropdown-shown");
+      }
     });
 
   }
