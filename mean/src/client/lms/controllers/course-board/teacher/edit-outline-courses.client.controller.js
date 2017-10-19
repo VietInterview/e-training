@@ -254,6 +254,9 @@
       });
       var section = node.data;
       var currentOrder = section.order;
+      if (prevNode.data.order >= currentOrder) {
+        prevNode.data.order = currentOrder - 1;
+      }
       section.order = prevNode.data.order;
       prevNode.data.order = currentOrder;
       section.$update(function() {
@@ -283,6 +286,9 @@
         return n.index === node.index + 1;
       });
       var currentOrder = section.order;
+      if (nextNode.data.order <= currentOrder) {
+        nextNode.data.order = currentOrder + 1;
+      }
       section.order = nextNode.data.order;
       nextNode.data.order = currentOrder;
       section.$update(function() {
