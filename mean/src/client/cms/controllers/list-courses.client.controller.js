@@ -13,8 +13,8 @@
     vm.copyCourse = copyCourse;
     vm.finishEditCourseTree = finishEditCourseTree;
     vm.selectGroup = selectGroup;
+    vm.createCourse = createCourse;
     vm.courses = [];
-
     vm.dtOptions = DTOptionsBuilder.fromFnPromise(loadCourse).withOption('createdRow', function(row, data, dataIndex) {
       // Recompiling so we can bind Angular directive to the DT
       $compile(angular.element(row).contents())($scope);
@@ -98,6 +98,7 @@
           var action = '<a  ui-sref="admin.workspace.cms.course-members({courseId:\'' + data._id + '\'})" data-uk-tooltip="{pos:\'bottom\'}" title="' + $translate.instant('ACTION.ENROLL') + '"><i class="md-icon material-icons uk-text-primary">group</i>  </a>' +
             '<a  ui-sref="admin.workspace.cms.courses.edit({courseId:\'' + data._id + '\'})" data-uk-tooltip="{pos:\'bottom\'}" title="' + $translate.instant('ACTION.EDIT') + '"><i class="md-icon material-icons">edit</i></a>' +
             '<a ui-sref="admin.workspace.cms.courses.view({courseId:\'' + data._id + '\'})" data-uk-tooltip="{pos:\'bottom\'}" title="' + $translate.instant('ACTION.VIEW') + '"><i class="md-icon material-icons">info_outline</i></a>' +
+              '<a ng-click="vm.remove(\'' + data._id + '\')" data-uk-tooltip="{pos:\'bottom\'}" title="' + $translate.instant('ACTION.DELETE') + '"><i class="md-icon material-icons">delete</i></a>'+
             '<a ng-click="vm.copyCourse(\'' + data._id + '\')" data-uk-tooltip="{pos:\'bottom\'}" title="' + $translate.instant('ACTION.COPY') + '"><i class="md-icon material-icons">content_copy</i></a>';
           return action;
         })
@@ -129,22 +130,48 @@
 
     function selectGroup(groups) {
       vm.groups = groups;
+       vm.courses = [];
+       _.each(vm.groups, function(group) {
+        CoursesService.byGroup({
+          groupId: group
+        }, function(skills) {
+          vm.courses = vm.courses.concat(skills);
+        });
+      });
+
       if (groups && groups.length)
         vm.dtInstance.reloadData(function() {}, true);
     }
 
     function remove(id) {
-      if (id === vm.course._id)
+      if (id === vm.courses._id)
         return;
       UIkit.modal.confirm($translate.instant('COMMON.CONFIRM_PROMPT'), function() {
         CoursesService.remove({
           courseId: id
         }, function() {
-          vm.reload = true;
           vm.dtInstance.reloadData(function() {}, true);
           Notification.success({
-            message: '<i class="uk-icon-check"></i> Course deleted successfully!'
+            message: '<i class="uk-icon-check"></i> User deleted successfully!'
           });
+        }, function (response) {
+          Notification.error({
+            message: '<i class="uk-icon-remove"></i> ' + response.data.message
+          });
+        });
+      });
+    }
+
+   function createCourse() {
+      if (!vm.groups) {
+        UIkit.modal.alert($translate.instant(''));
+        return;
+      }
+      var skill = new  CoursesService();
+      skill.group = vm.groups[0];
+      skill.$save(function() {
+        $state.go('admin.workspace.cms.courses.edit', {
+          courseId: skill._id
         });
       });
     }
@@ -168,4 +195,5 @@
       });
     }
   }
+
 }(window.UIkit));
