@@ -17,7 +17,15 @@
 <div id="page_content">
   <div id="page_content_inner">
     <div class="md-card gradeboard-cource">
-      <div class="content-table-gradebook md-card-content">
+      <div class="content-table-gradebook md-card-content" style="position: relative;">
+        <div class="loading" ng-show="vm.loading">
+          <div class="loading-message">
+            <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+              <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+            </svg>
+            <span>Đang tính toán điểm...</span>
+          </div>
+        </div>
         <h3 class="md-card-toolbar-heading-text large">
           {{"PAGE.LMS.MY_COURSES.COURSE_GRADE.QUIZ_INFO" | translate}}
         </h3>
@@ -83,7 +91,7 @@
                 <td class="uk-text-center" ng-if="!vm.scoreMap[member._id].scores.length">
                   0
                 </td>
-                <td class="uk-text-center">{{(vm.scoreMap[member._id].totalScore) ? vm.scoreMap[member._id].totalScore : 0}}</td>
+                <td class="uk-text-center">{{(member.totalScore) ? member.totalScore : 0}}</td>
                 <td class="uk-text-center">
                   <span ng-show="vm.scoreMap[member._id].totalScore >= vm.gradescheme.benchmark && member.enrollmentStatus=='completed'">{{"COMMON.PASS" | translate}}</span>
                   <span ng-show="vm.scoreMap[member._id].totalScore < vm.gradescheme.benchmark && member.enrollmentStatus=='completed'">{{"COMMON.FAIL" | translate}}</span>
@@ -119,7 +127,7 @@
               <td class="uk-text-center">{{member.member.displayName}}</td>
               <td class="uk-text-center" ng-repeat="score in vm.scoreMap[member._id].scores"
               ng-if="vm.scoreMap[member._id].scores.length">
-                {{score.rawPercent}}
+                {{score.rawPercent}}<span ng-show="score.timeStart" style="color: green"> ({{score.timeStart}}s)</span>
               </td>
               <td class="uk-text-center" ng-if="!vm.scoreMap[member._id].scores.length">
                 0

@@ -175,6 +175,7 @@
 						 <ul class="uk-tab" data-uk-tab="{connect:'#permissionApi'}">
 							 <li><a href="">Quản lý hệ thống</a></li>
 							 <li><a href="">Quản lý khóa học</a></li>
+							 <li><a href="">Khác</a></li>
 						 </ul>
 
 						 <ul id="permissionApi" class="uk-switcher" style="max-height: 400px;overflow-y:scroll;">
@@ -223,6 +224,37 @@
 									 </thead>
 									 <tbody>
 									 <tr ng-repeat="endpoint in vm.endpointsCourse | orderBy:'name'" >
+										 <td class="uk-text-left">{{endpoint.name | translate}}</td>
+										 <td class="uk-text-center">
+											 <input 	type="checkbox" icheck ng-model='endpoint.view'>
+										 </td>
+										 <td class="uk-text-center">
+											 <input 	type="checkbox" icheck ng-model='endpoint.create'>
+										 </td>
+										 <td class="uk-text-center">
+											 <input 	type="checkbox" icheck ng-model='endpoint.update'>
+										 </td>
+										 <td class="uk-text-center">
+											 <input 	type="checkbox" icheck ng-model='endpoint.delete'>
+										 </td>
+									 </tr>
+									 </tbody>
+								 </table>
+							 </li>
+							 <li>
+								 <table
+									 class="uk-table uk-table-hover uk-table-nowrap uk-table-condensed">
+									 <thead>
+									 <tr>
+										 <th class="uk-text-center uk-text-upper">{{'MODEL.PERMISSION_API.NAME'|translate}}</th>
+										 <th class="uk-text-center uk-text-upper">{{'COMMON.ENDPOINT_ACCESS.VIEW'|translate}}</th>
+										 <th class="uk-text-center uk-text-upper">{{'COMMON.ENDPOINT_ACCESS.CREATE'|translate}}</th>
+										 <th class="uk-text-center uk-text-upper">{{'COMMON.ENDPOINT_ACCESS.UPDATE'|translate}}</th>
+										 <th class="uk-text-center uk-text-upper">{{'COMMON.ENDPOINT_ACCESS.DELETE'|translate}}</th>
+									 </tr>
+									 </thead>
+									 <tbody>
+									 <tr ng-repeat="endpoint in vm.endpointsOther | orderBy:'name'" >
 										 <td class="uk-text-left">{{endpoint.name | translate}}</td>
 										 <td class="uk-text-center">
 											 <input 	type="checkbox" icheck ng-model='endpoint.view'>

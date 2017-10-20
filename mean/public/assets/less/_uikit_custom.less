@@ -1836,3 +1836,86 @@ group-tree-view .fancytree-container {
     max-height:200px;
     overflow-y: scroll;
 }
+#program{
+    text-align: left! important;
+    line-height: 42px;
+    font: 400 24px / 28px "Roboto", sans-serif;
+}
+#courseofprogram{
+    font-size: 24px;
+    line-height: 42px;
+
+}
+#announce{
+font-size:16px;
+}
+#bind-text{
+    margin-top: -70px;
+    margin-left: 160px;
+    font-size: 16px;
+}
+#image-page{
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background-color: white;
+}
+
+.loading {
+    background-color: rgba(0, 0, 0, 0.71);
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 99999;
+}
+
+.loading-message {
+    color: #fff;
+    text-align: center;
+    margin-top: 20%;
+    font-size: 20px;
+}
+
+.loading-message span {
+    margin-left: 12px;
+}
+
+.spinner {
+    animation: rotator 1.4s linear infinite;
+}
+
+@keyframes rotator {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(270deg); }
+}
+
+.path {
+    stroke-dasharray: 187;
+    stroke-dashoffset: 0;
+    transform-origin: center;
+    animation:
+            dash 1.4s ease-in-out infinite,
+            colors (1.4s*4) ease-in-out infinite;
+}
+
+@keyframes colors {
+    0% { stroke: #4285F4; }
+    25% { stroke: #DE3E35; }
+    50% { stroke: #F7C223; }
+    75% { stroke: #1B9A59; }
+    100% { stroke: #4285F4; }
+}
+
+@keyframes dash {
+    0% { stroke-dashoffset: 187; }
+    50% {
+        stroke-dashoffset: 187/4;
+        transform:rotate(135deg);
+    }
+    100% {
+        stroke-dashoffset: 187;
+        transform:rotate(450deg);
+    }
+}

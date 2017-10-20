@@ -17,6 +17,8 @@
     vm.user = user;
     vm.gradescheme = gradescheme;
     vm.scoreMap = {};
+    var memberCount = 0;
+    vm.loading = true;
 
     function examPromise() {
       return EditionSectionsService.byEdition({
@@ -27,7 +29,7 @@
     function membersPromise() {
       return CourseMembersService.byCourse({
         courseId: vm.course._id
-      }, function() {}).$promise;
+      }, function(sections) {}).$promise;
     }
 
     membersPromise().then(function(members) {
@@ -80,13 +82,17 @@
               totalScore: scores.totalPercent,
               scores: scores.scores
             };
-
-            curr.totalScore = scores.totalPercent;
-
-            vm.members = _.sortBy(vm.members, function (member) {
-              return member.totalScore * -1;
-            });
-
+            curr.totalScore = scores.scores[0].rawPercent;
+            curr.timeStart = parseInt(scores.scores[0].timeStart);
+            memberCount++;
+            if (memberCount === vm.members.length) {
+              vm.members = _(vm.members).chain().sortBy(function(member) {
+                return member.timeStart || Infinity;
+              }).sortBy(function(member) {
+                return member.totalScore * -1;
+              }).value();
+              vm.loading = false;
+            }
           });
         });
       }, $q.resolve()).then(function() { // Export to csv file
