@@ -98,7 +98,8 @@
           var action = '<a  ui-sref="admin.workspace.cms.course-members({courseId:\'' + data._id + '\'})" data-uk-tooltip="{pos:\'bottom\'}" title="' + $translate.instant('ACTION.ENROLL') + '"><i class="md-icon material-icons uk-text-primary">group</i>  </a>' +
             '<a  ui-sref="admin.workspace.cms.courses.edit({courseId:\'' + data._id + '\'})" data-uk-tooltip="{pos:\'bottom\'}" title="' + $translate.instant('ACTION.EDIT') + '"><i class="md-icon material-icons">edit</i></a>' +
             '<a ui-sref="admin.workspace.cms.courses.view({courseId:\'' + data._id + '\'})" data-uk-tooltip="{pos:\'bottom\'}" title="' + $translate.instant('ACTION.VIEW') + '"><i class="md-icon material-icons">info_outline</i></a>' +
-            '<a ng-click="vm.copyCourse(\'' + data._id + '\')" data-uk-tooltip="{pos:\'bottom\'}" title="' + $translate.instant('ACTION.COPY') + '"><i class="md-icon material-icons">content_copy</i></a>';
+            '<a ng-click="vm.copyCourse(\'' + data._id + '\')" data-uk-tooltip="{pos:\'bottom\'}" title="' + $translate.instant('ACTION.COPY') + '"><i class="md-icon material-icons">content_copy</i></a>' +
+            '<a  ng-click="vm.remove(\'' + data._id + '\')"><i class="md-icon uk-text-danger material-icons" data-uk-tooltip="{cls:\'uk-tooltip-small\',pos:\'bottom\'}" title=' + $translate.instant('ACTION.DELETE') + '>delete</i></a>';
           return action;
         })
     ];
@@ -134,16 +135,17 @@
     }
 
     function remove(id) {
-      if (id === vm.course._id)
-        return;
       UIkit.modal.confirm($translate.instant('COMMON.CONFIRM_PROMPT'), function() {
         CoursesService.remove({
           courseId: id
         }, function() {
-          vm.reload = true;
           vm.dtInstance.reloadData(function() {}, true);
           Notification.success({
-            message: '<i class="uk-icon-check"></i> Course deleted successfully!'
+            message: '<i class="uk-icon-check"></i> Xóa khóa học thành công!'
+          });
+        }, function(errorResponse) {
+          Notification.error({
+            message: '<i class="uk-icon-ban"></i> ' + errorResponse.data.message
           });
         });
       });

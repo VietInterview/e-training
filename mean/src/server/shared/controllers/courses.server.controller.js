@@ -16,7 +16,8 @@ var path = require('path'),
     Html = mongoose.model('Html'),
     Video = mongoose.model('Video'),
     Exam = mongoose.model('Exam'),
-    Exercise = mongoose.model('Exercise');
+    Exercise = mongoose.model('Exercise'),
+    CourseMember = mongoose.model('CourseMember');
 var office2html = require('office2html'),
     generateHtml = office2html.generateHtml;
 var pdftohtml = require('pdftohtmljs');
@@ -89,13 +90,27 @@ exports.update = function(req, res) {
 exports.delete = function(req, res) {
     var course = req.course;
 
-    course.remove(function(err) {
+    CourseMember.find({
+        course: req.course._id
+    }).exec(function(err, members) {
         if (err) {
             return res.status(400).send({
                 message: errorHandler.getErrorMessage(err)
             });
+        } else if (members.length) {
+            return res.status(400).send({
+                message: 'Không thể xóa khóa học có học viên'
+            });
         } else {
-            res.jsonp(course);
+            course.remove(function(err) {
+                if (err) {
+                    return res.status(400).send({
+                        message: errorHandler.getErrorMessage(err)
+                    });
+                } else {
+                    res.jsonp(course);
+                }
+            });
         }
     });
 };
