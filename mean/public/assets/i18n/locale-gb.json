@@ -356,6 +356,7 @@
 	"ACTION.HAND_UP":"Raise hand",
 	"ACTION.HAND_DOWN":"Low hand",
 	"ACTION.CONNECT":"Connect",
+  "ACTION.COPY": "Copy",
 	"ACTION.SIGN_IN": "Sign In",
 	"ACTION.SELECT": "Select",
 	"ACTION.SIGN_UP": "Registration",
@@ -866,5 +867,8 @@
 	"COURSE.SORTBYNAME.AZ": "Sort by name from a to z",
 	"COURSE.SORTBYNAME.ZA": "Sort by name from z to a",
 	"COURSE.SORTBYDATE": "Sort by course start date",
-	"ALERT.COURSE.LOCK": "Function is locked!"
+	"ALERT.COURSE.LOCK": "Function is locked!",
+	"ACTION.SCORM_FULL": "View as full screen",
+  "SELECT.ORDER_BY": "Sort by...",
+  "ALERT.CONFIRM_DELETE": "Do you want to delete?"
 }

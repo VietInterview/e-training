@@ -48,7 +48,7 @@
               vm.timeoutToken = $timeout(function() {
                 $interval.cancel(vm.intervalToken);
                 vm.attempt.status = 'completed';
-                vm.attempt.end = new Date();
+                vm.attempt.start = new Date();
                 vm.attempt.answers = _.pluck(vm.questions, 'answer._id');
                 vm.attempt.$update(function() {
                   $scope.$parent.vm.nextSection();

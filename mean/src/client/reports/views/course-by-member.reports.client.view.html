@@ -5,7 +5,15 @@
 		<div class="uk-grid" data-uk-grid-margin>
 			<div class="uk-width-medium-1-1">
 				<div class="md-card">
-					<div class="content-table-gradebook md-card-content">
+					<div class="content-table-gradebook md-card-content" style="position: relative;">
+            <div class="loading" ng-show="vm.loading">
+              <div class="loading-message">
+                <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                  <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+                </svg>
+                <span>Đang tính toán điểm...</span>
+              </div>
+            </div>
 						<div class="uk-margin-bottom">
 							<a class="md-btn  md-btn-wave-light md-btn-icon"
 								data-uk-modal="{target:'#select_user'}">

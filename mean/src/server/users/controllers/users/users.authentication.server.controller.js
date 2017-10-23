@@ -206,13 +206,29 @@ exports.oauthCallback = function(strategy) {
       if (!user) {
         return res.redirect('/authentication/signin');
       }
-      req.login(user, function(err) {
-        if (err) {
-          UserLog.schema.statics.login(user, false);
-          return res.redirect('/authentication/signin');
+
+      Setting.findOne({
+        code: 'REGISTER_GROUP'
+      }).exec(function(err, setting) {
+        if (!err && setting && setting.valueString) {
+          user.group = setting.valueString;
         }
-        UserLog.schema.statics.login(user, true);
-        return res.redirect(info.redirect_to || '/');
+        user.save(function(err) {
+          if (err) {
+            return res.status(422).send({
+              message: errorHandler.getErrorMessage(err)
+            });
+          } else {
+            req.login(user, function(err) {
+              if (err) {
+                UserLog.schema.statics.login(user, false);
+                return res.redirect('/authentication/signin');
+              }
+              UserLog.schema.statics.login(user, true);
+              return res.redirect(info.redirect_to || '/');
+            });
+          }
+        });
       });
     })(req, res, next);
   };
