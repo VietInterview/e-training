@@ -62,9 +62,9 @@
       DTColumnBuilder.newColumn(null).withTitle($translate.instant('MODEL.USER.STATUS')).notSortable()
       .renderWith(function(data, type, full, meta) {
         if (data.banned)
-          return '<span class="uk-badge uk-badge-danger">Banned</span>';
+          return '<span class="uk-badge uk-badge-danger">Đã khóa</span>';
         else
-          return '<span class="uk-badge uk-badge-success">Ok</span>';
+          return '<span class="uk-badge uk-badge-success">Đang hoạt động</span>';
       }),
       DTColumnBuilder.newColumn('roles').withTitle($translate.instant('MODEL.USER.ROLE')),
       DTColumnBuilder.newColumn(null).withTitle($translate.instant('COMMON.ACTION')).notSortable()
@@ -84,6 +84,7 @@
 
     function finishEditOrgTree() {
       $window.location.reload();
+
     }
 
     function remove(id) {
