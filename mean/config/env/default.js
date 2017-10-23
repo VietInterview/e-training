@@ -3,7 +3,7 @@
 var s = module.exports = {
   app: {
     title: 'e-Training',
-    customer: "Aten",
+    customer: "Mayumi",
     description: 'Corporate Learning Management System',
     keywords: 'Training, LMS, CMS, Enterprise',
     googleAnalyticsTrackingID: process.env.GOOGLE_ANALYTICS_TRACKING_ID || 'GOOGLE_ANALYTICS_TRACKING_ID'
@@ -182,11 +182,11 @@ var s = module.exports = {
   },
   secure: {
     ssl: true,
-    privateKey: process.env.ETRAINING_PRIVATE_KEY || 'config/sslcerts/key.pem',
-    certificate: process.env.ETRAINING_CERTIFICATE || 'config/sslcerts/cert.pem'
+    privateKey: '/etc/letsencrypt/live/mayumi.vietinterview.com/privkey.pem',
+    certificate: '/etc/letsencrypt/live/mayumi.vietinterview.com/cert.pem'
   },
   seedDB: {
-    seed: true,
+    seed: false,
     options: {
       logResults: process.env.MONGO_SEED_LOG_RESULTS !== 'false',
       seedUser: {
