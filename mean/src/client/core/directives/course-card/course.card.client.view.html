@@ -12,14 +12,12 @@
 			<div class="uk-width-6-10 uk-width-small-3-5 uk-width-medium-1-1">
 				<div class="content-meta-data">
 					<div class="title-author-info">
-						<h3 class="course-title">{{course.name | truncateWord: 8}}</h3>
+						<h3 class="course-title uk-text-primary">{{course.name | truncateWord: 8}}</h3>
 						<span class="uk-text-truncate author">{{course.user.displayName}}</span>
 					</div>
 
 					<div class="level-date-home course-info">
-						<span class="date">{{course.startDate | date
-							:'dd-MM-yyyy'}}</span>&nbsp;&nbsp; <span class="capitalize">{{course.level}}
-						</span>
+						<span class="">{{course.startDate | date :'dd-MM-yyyy'}}</span>
 					</div>
 				</div>
 			</div>

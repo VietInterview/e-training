@@ -29,7 +29,7 @@
                   } else {
                     examScore += 1;
                     answer = _.find(attempt.answers, function(obj) {
-                      return obj.question === question._id;
+                      return obj && obj.question === question._id;
                     });
                     if (answer && answer.isCorrect)
                       rawScore++;
@@ -80,6 +80,9 @@
               }, function(exam) {
                 memberScoreByAttempt(member, latestAttempt, exam, edition).then(function(result) {
                   result.sectionId = section._id;
+                  var differenceTravel = new Date(latestAttempt.end).getTime() - new Date(latestAttempt.start).getTime();
+                  var seconds = Math.floor((differenceTravel) / (1000));
+                  result.timeStart = seconds;
                   resolve(result);
                 });
               });

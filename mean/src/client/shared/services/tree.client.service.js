@@ -13,13 +13,17 @@
               var childGroups = _.filter(groups, function(group) {
                 return (!group.parent && !rootId) || group.parent === rootId;
               });
+              childGroups = _.sortBy(childGroups, function (childGroup) {
+                return childGroup.order;
+              });
+
               var fullTitle = root ? root.fullTitle : '';
               var childNodes = _.map(childGroups, function(obj) {
                 return {
                   title: obj.name,
                   folder: true,
                   fullTitle: fullTitle + obj.name + ' / ',
-                  expanded: true,
+                  expanded: false,
                   key: obj._id,
                   children: [],
                   data: obj
@@ -29,6 +33,11 @@
                 childNode.children = buildTopDownTree(childNode.key, childNode);
                 childNode.parent = root;
               });
+
+              childNodes = _.sortBy(childNodes, function (childNode) {
+                return childNode.data.order;
+              });
+
               return childNodes;
             }
             return buildTopDownTree(null, null);

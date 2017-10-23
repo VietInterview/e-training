@@ -5,13 +5,14 @@
     .module('users.admin')
     .controller('UserListController', UserListController);
 
-  UserListController.$inject = ['$scope', '$state', '$filter', '$compile', 'Authentication', 'AdminService', '$timeout', '$location', '$window', 'GroupsService', 'DTOptionsBuilder', 'DTColumnBuilder', 'Notification', '$q', 'treeUtils', '$translate', '_'];
+  UserListController.$inject = ['$scope', '$state', '$filter', '$compile', 'Authentication', 'AdminService', '$timeout', '$location', '$window', 'GroupsService', 'DTOptionsBuilder', 'DTColumnBuilder', 'Notification', '$q', 'treeUtils', '$translate', '_', 'userResolve'];
 
-  function UserListController($scope, $state, $filter, $compile, Authentication, AdminService, $timeout, $location, $window, GroupsService, DTOptionsBuilder, DTColumnBuilder, Notification, $q, treeUtils, $translate, _) {
+  function UserListController($scope, $state, $filter, $compile, Authentication, AdminService, $timeout, $location, $window, GroupsService, DTOptionsBuilder, DTColumnBuilder, Notification, $q, treeUtils, $translate, _, user) {
     var vm = this;
     vm.finishEditOrgTree = finishEditOrgTree;
     vm.remove = remove;
     vm.dtInstance = {};
+    vm.user = user;
 
     vm.dtOptions = DTOptionsBuilder.fromFnPromise(loadUser).withOption('createdRow', function(row, data, dataIndex) {
       // Recompiling so we can bind Angular directive to the DT
@@ -61,9 +62,9 @@
       DTColumnBuilder.newColumn(null).withTitle($translate.instant('MODEL.USER.STATUS')).notSortable()
       .renderWith(function(data, type, full, meta) {
         if (data.banned)
-          return '<span class="uk-badge uk-badge-danger">Banned</span>';
+          return '<span class="uk-badge uk-badge-danger">Đã khóa</span>';
         else
-          return '<span class="uk-badge uk-badge-success">Ok</span>';
+          return '<span class="uk-badge uk-badge-success">Đang hoạt động</span>';
       }),
       DTColumnBuilder.newColumn('roles').withTitle($translate.instant('MODEL.USER.ROLE')),
       DTColumnBuilder.newColumn(null).withTitle($translate.instant('COMMON.ACTION')).notSortable()
@@ -83,6 +84,7 @@
 
     function finishEditOrgTree() {
       $window.location.reload();
+
     }
 
     function remove(id) {
@@ -95,6 +97,10 @@
           vm.dtInstance.reloadData(function() {}, true);
           Notification.success({
             message: '<i class="uk-icon-check"></i> User deleted successfully!'
+          });
+        }, function (response) {
+          Notification.error({
+            message: '<i class="uk-icon-remove"></i> ' + response.data.message
           });
         });
       });

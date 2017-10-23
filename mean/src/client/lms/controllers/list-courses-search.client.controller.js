@@ -9,9 +9,9 @@
     .module('lms')
     .controller('LmsCoursesSearchController', LmsCoursesSearchController);
 
-  LmsCoursesSearchController.$inject = ['$scope', '$state', '$stateParams', '$window', 'Authentication', '$timeout', 'CoursesService', 'Notification', 'GroupsService', '$q', '_', 'treeUtils'];
+  LmsCoursesSearchController.$inject = ['$scope', '$state', '$stateParams', '$window', 'Authentication', '$timeout', 'CoursesService', 'Notification', 'GroupsService', '$q', '_', 'treeUtils', '$translate'];
 
-  function LmsCoursesSearchController($scope, $state, $stateParams, $window, Authentication, $timeout, CoursesService, Notification, GroupsService, $q, _, treeUtils) {
+  function LmsCoursesSearchController($scope, $state, $stateParams, $window, Authentication, $timeout, CoursesService, Notification, GroupsService, $q, _, treeUtils, $translate) {
     var vm = this;
     vm.keyword = '';
 
@@ -83,7 +83,7 @@
       valueField: 'value',
       labelField: 'label',
       create: false,
-      placeholder: 'Choose...'
+      placeholder: $translate.instant("SELECT.ORDER_BY")
     };
     function toggleExpand(node) {
       node.data.coursesList = [];

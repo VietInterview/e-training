@@ -11,7 +11,13 @@ var path = require('path'),
     multer = require('multer'),
     config = require(path.resolve('./config/config')),
     Course = mongoose.model('Course'),
-    CourseEdition = mongoose.model('CourseEdition');
+    CourseEdition = mongoose.model('CourseEdition'),
+    EditionSection = mongoose.model('EditionSection'),
+    Html = mongoose.model('Html'),
+    Video = mongoose.model('Video'),
+    Exam = mongoose.model('Exam'),
+    Exercise = mongoose.model('Exercise'),
+    CourseMember = mongoose.model('CourseMember');
 var office2html = require('office2html'),
     generateHtml = office2html.generateHtml;
 var pdftohtml = require('pdftohtmljs');
@@ -84,13 +90,27 @@ exports.update = function(req, res) {
 exports.delete = function(req, res) {
     var course = req.course;
 
-    course.remove(function(err) {
+    CourseMember.find({
+        course: req.course._id
+    }).exec(function(err, members) {
         if (err) {
             return res.status(400).send({
                 message: errorHandler.getErrorMessage(err)
             });
+        } else if (members.length) {
+            return res.status(400).send({
+                message: 'Không thể xóa khóa học có học viên'
+            });
         } else {
-            res.jsonp(course);
+            course.remove(function(err) {
+                if (err) {
+                    return res.status(400).send({
+                        message: errorHandler.getErrorMessage(err)
+                    });
+                } else {
+                    res.jsonp(course);
+                }
+            });
         }
     });
 };
@@ -217,6 +237,76 @@ exports.courseByID = function(req, res, next, id) {
         req.course = course;
         next();
     });
+};
+
+exports.copyCourse = function (req, res) {
+  var course = req.course;
+
+  CourseEdition.findOne({
+    course: course
+  }).exec(function(err, edition) {
+    EditionSection.find({
+      edition: edition._id
+    }).exec(function(err, sections) {
+
+      course._id = mongoose.Types.ObjectId();
+      course.name = course.name + ' - Copy';
+      course.code = course.code + '.CP';
+      course.user = req.user;
+      course.isNew = true;
+      course.save(function(err) {
+        if (err) {
+          return res.status(400).send({
+            message: errorHandler.getErrorMessage(err)
+          });
+        } else {
+          var edition = new CourseEdition();
+          edition.course = course._id;
+          edition.name = 'v1.0';
+          edition.primary = true;
+          edition.save(function(err) {
+            if (err) {
+              return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+              });
+            } else {
+              sections = _.groupBy(sections, function (section) {
+                return section.parent;
+              });
+              sections[undefined].forEach(function (rootSection) {
+                rootSection.edition = edition._id;
+                var rootSectionId = rootSection._id;
+                rootSection._id = mongoose.Types.ObjectId();
+                rootSection.isNew = true;
+                rootSection.save(function (err) {
+                  if (err) {
+                    console.log(err);
+                    res.status(422).send(err);
+                  } else if (sections[rootSectionId] && sections[rootSectionId] instanceof Array) {
+                    sections[rootSectionId].forEach(function (childrenSection) {
+                      if (childrenSection.parent) {
+                        childrenSection.edition = edition._id;
+                        childrenSection._id = mongoose.Types.ObjectId();
+                        childrenSection.isNew = true;
+                        childrenSection.parent = rootSection._id;
+                        childrenSection.save(function (err) {
+                          if (err) {
+                            console.log(err);
+                            res.status(422).send(err);
+                          }
+                        });
+                      }
+                    })
+                  }
+                });
+              });
+              res.jsonp(course);
+            }
+          });
+        }
+      });
+    });
+  });
 };
 
 
@@ -478,7 +568,7 @@ exports.uploadCourseScorm = function(req, res) {
                     if (!fs.existsSync(dirPath))
                         fs.mkdirSync(dirPath);
                     fs.createReadStream(filePath).pipe(unzip.Extract({ path: dirPath }));
-                    var packageUrl = path.join( config.uploads.course.scorm.urlPath ,  req.file.filename ,'res/index.html');
+                    var packageUrl = path.join( config.uploads.course.scorm.urlPath ,  req.file.filename ,'story.html');
                     console.log(packageUrl);
                     resolve(packageUrl);
                 }
@@ -527,10 +617,10 @@ exports.convertToHtml = function(req, res) {
 
                         var converter = new pdftohtml(filePath, "temp.html");
 
-                        // See presets (ipad, default) 
-                        // Feel free to create custom presets 
-                        // see https://github.com/fagbokforlaget/pdftohtmljs/blob/master/lib/presets/ipad.js 
-                        // convert() returns promise 
+                        // See presets (ipad, default)
+                        // Feel free to create custom presets
+                        // see https://github.com/fagbokforlaget/pdftohtmljs/blob/master/lib/presets/ipad.js
+                        // convert() returns promise
                         converter.convert().then(function() {
                             console.log("Success");
                             fs = require('fs');

@@ -218,7 +218,7 @@
             sectionId: node.data._id
           });
       } else
-        UIkit.modal.prompt($translate.instant('MODEL.GROUP.NAME'), '', function(val) {
+        UIkit.modal.prompt($translate.instant('MODEL.GROUP.NAME'), section.name, function(val) {
           val = val.trim();
           if (!val) {
             UIkit.modal.alert($translate.instant('ERROR.GROUP.EMPTY_NAME_NOT_ALLOW'));
@@ -234,8 +234,9 @@
         });
     }
 
-    function editVisible(node) {
+    function editVisible(node, visible) {
       var section = node.data;
+      section.visible = visible;
       section.$update(function() {}, function(errorResponse) {
         Notification.error({
           message: errorResponse.data.message,
@@ -253,6 +254,9 @@
       });
       var section = node.data;
       var currentOrder = section.order;
+      if (prevNode.data.order >= currentOrder) {
+        prevNode.data.order = currentOrder - 1;
+      }
       section.order = prevNode.data.order;
       prevNode.data.order = currentOrder;
       section.$update(function() {
@@ -282,6 +286,9 @@
         return n.index === node.index + 1;
       });
       var currentOrder = section.order;
+      if (nextNode.data.order <= currentOrder) {
+        nextNode.data.order = currentOrder + 1;
+      }
       section.order = nextNode.data.order;
       nextNode.data.order = currentOrder;
       section.$update(function() {
@@ -358,14 +365,17 @@
         });
         return;
       }
-      section.$remove(function(response) {
-        $window.location.reload();
-      }, function(errorResponse) {
-        Notification.error({
-          message: errorResponse.data.message,
-          title: '<i class="uk-icon-ban"></i> Section removed error!'
+      UIkit.modal.confirm($translate.instant('MODAL.COURSES.DELETE.PROMPT'), function() {
+        section.$remove(function(response) {
+          $window.location.reload();
+        }, function(errorResponse) {
+          Notification.error({
+            message: errorResponse.data.message,
+            title: '<i class="uk-icon-ban"></i> Section removed error!'
+          });
         });
       });
+
     }
 
   }
