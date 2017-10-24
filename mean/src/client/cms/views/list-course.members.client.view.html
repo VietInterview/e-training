@@ -1,4 +1,12 @@
+<style type="text/css">
+	@media (min-width: 768px) {
+     #search{
+		 float:right
+	 }
+	}
 
+
+</style>
 <div id="page_content">
 
 	<div id="page_heading" data-uk-sticky="{ top: 48, media: 960 }">
@@ -125,11 +133,14 @@
 <div class="uk-modal " id="new_student">
 	<div class="uk-modal-dialog uk-modal-dialog-large">
 		<div class="uk-alert uk-text-center uk-alert-info" id = "info" style=" background: initial!important;">
-			<h3 class="heading_b" id="student" style="margin-left: -900px">{{'PAGE.CMS.COURSES.ENROLL.SELECT_STUDENT'
+			<h3 class="heading_b" id="student" style="float:left">{{'PAGE.CMS.COURSES.ENROLL.SELECT_STUDENT'
 				| translate}}</h3>
 		</div>
-		<input type="text" class="md-input" placeholder="Search user" ng-model="searchUser.displayName" style = "border-radius: 4px;width:410px " >
-		<div class="uk-overflow-container">
+		<div>
+			<input type="text" class="md-input" id="search" placeholder="Search user" ng-model="searchUser.displayName" style = "border-radius: 4px;width:410px;" >
+		</div>
+
+		<div class="uk-overflow-container" style="float:left">
 
 			<div class="uk-grid" data-uk-grid-margin>
 				<div class="uk-width-medium-2-5 ">
