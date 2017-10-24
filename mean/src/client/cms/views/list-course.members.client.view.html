@@ -26,8 +26,8 @@
 
 <div class="uk-modal " id="new_teacher">
 	<div class="uk-modal-dialog uk-modal-dialog-large">
-		<div class="uk-alert uk-text-center uk-alert-info">
-			<h3 class="heading_b">{{'PAGE.CMS.COURSES.ENROLL.SELECT_TEACHER'
+		<div class="uk-alert uk-text-center uk-alert-info" id="alert"  >
+			<h3 class="heading_b" >{{'PAGE.CMS.COURSES.ENROLL.SELECT_TEACHER'
 				| translate}}</h3>
 		</div>
 		<div class="uk-overflow-container">
@@ -124,10 +124,11 @@
 
 <div class="uk-modal " id="new_student">
 	<div class="uk-modal-dialog uk-modal-dialog-large">
-		<div class="uk-alert uk-text-center uk-alert-info">
-			<h3 class="heading_b">{{'PAGE.CMS.COURSES.ENROLL.SELECT_STUDENT'
+		<div class="uk-alert uk-text-center uk-alert-info" id = "info" style=" background: initial!important;">
+			<h3 class="heading_b" id="student" style="margin-left: -900px">{{'PAGE.CMS.COURSES.ENROLL.SELECT_STUDENT'
 				| translate}}</h3>
 		</div>
+		<input type="text" class="md-input" placeholder="Search user" ng-model="searchUser.displayName" style = "border-radius: 4px;width:410px " >
 		<div class="uk-overflow-container">
 
 			<div class="uk-grid" data-uk-grid-margin>
@@ -160,7 +161,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr ng-repeat="user in vm.studentUsers">
+							<tr ng-repeat="user in vm.studentUsers|filter:searchUser">
 								<td class="uk-text-center uk-table-middle small_col"><input
 									type="checkbox" icheck ng-model="user.selectedAsStudent"
 									class="check_row" table-check-row></td>
@@ -168,7 +169,6 @@
 									class="user_action_image"><img class="md-user-image"
 										src="{{user.profileImageURL}}" alt="" /></a></td>
 								<td class="uk-text-center">{{user.displayName}}</td>
-								<td class="uk-text-center">{{user.position}}</td>
 								<td class="uk-text-center">{{user.group.name}}</td>
 							</tr>
 						</tbody>
