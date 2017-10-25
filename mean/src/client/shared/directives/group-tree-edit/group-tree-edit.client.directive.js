@@ -63,7 +63,7 @@
                   } else {
                     group.parent = null;
                   }
-                  group.order = node.parent.children.indexOf(node)
+                  group.order = node.parent.children.indexOf(data._id)
                   updateGroup(group);
                 }
               },
