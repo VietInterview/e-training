@@ -59,11 +59,11 @@
                   data.otherNode.moveTo(node, data.hitMode);
                   var group = data.otherNode.data;
                   if (node.parent.data._id) {
-                    group.parent = node.parent.key;
+                    group.parent = node.parent.data._id;
                   } else {
                     group.parent = null;
                   }
-                  group.order = node.parent.children.indexOf(node)
+                  group.order = node.parent.children.indexOf(data._id)
                   updateGroup(group);
                 }
               },
