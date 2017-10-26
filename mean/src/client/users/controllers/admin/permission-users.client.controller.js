@@ -297,7 +297,7 @@
 
     function editPermissionApi() {
       vm.permissionApi = _.find(vm.permissionApiList, function(permission) {
-        return permission._id === vm.permissionApi._id;
+        return permission._id === vm.currentPermissionApiId;
       });
       _.each(vm.endpoints, function(endpoint) {
         var existRule = _.find(vm.permissionApi.endpoints, function(rule) {
