@@ -96,9 +96,21 @@
     }
 
     function remove(material) {
-      material.$remove(function() {
+      UIkit.modal.confirm($translate.instant('COMMON.CONFIRM_PROMPT'), function() {
         vm.materials = _.reject(vm.materials, function(m) {
           return m._id === material._id;
+        });
+
+        material.$remove(function(response) {
+          if (response._id) {
+            Notification.success({
+              message: '<i class="uk-icon-check"></i> Xóa tài liệu thành công!'
+            });
+          } else {
+            Notification.error({
+              message: '<i class="uk-icon-remove"></i> Có lỗi xảy khi xóa tài liệu.'
+            });
+          }
         });
       });
     }

@@ -110,7 +110,7 @@ exports.delete = function(req, res) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
       });
-    } else {
+    } else if (config.uploads && config.uploads.file) {
       var existFilename = config.uploads.file.document.dest + path.basename(material.downloadURL);
       fs.unlink(existFilename, function(unlinkError) {
         if (unlinkError) {
@@ -121,6 +121,8 @@ exports.delete = function(req, res) {
           res.jsonp(material);
         }
       });
+    } else {
+      res.jsonp(material);
     }
   });
 };
