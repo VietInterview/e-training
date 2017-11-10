@@ -52,6 +52,10 @@ var AttemptSchema = new Schema({
   user: {
     type: Schema.ObjectId,
     ref: 'User'
+  },
+  webcam: {
+    type: String,
+    default: ''
   }
 });
 
