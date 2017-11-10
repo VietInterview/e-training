@@ -34,7 +34,7 @@
             var attemptCount = _.filter(vm.attempts, function(att) {
               return att.section._id === vm.section._id;
             }).length;
-            if (attemptCount >= vm.quiz.maxAttempt && vm.quiz.maxAttempt > 0) {
+            if (false) {
               vm.alert = $translate.instant('ERROR.COURSE_STUDY.MAX_ATTEMPT_EXCEED');
             } else {
               vm.attempt = new AttemptsService();
@@ -135,7 +135,22 @@
       }
     }
 
+    vm.onCaptureComplete = function(src) {
+      vm.attempt.webcam = src[0];
+      vm.attempt.$update(function() {
+        $interval.cancel(vm.intervalToken);
+        $timeout.cancel(vm.timeoutToken);
+
+        if (!$scope.$parent.vm.endCourse) {
+          $scope.$parent.vm.nextSection();
+        } else {
+          vm.completeCourse = true;
+        }
+      });
+    };
+
     function submitQuiz() {
+      $scope.$broadcast('ngWebcam_capture');
       save(function() {
         UIkit.modal.confirm($translate.instant('COMMON.CONFIRM_PROMPT'), function() {
           vm.attempt.status = 'completed';
@@ -144,14 +159,6 @@
             return obj.answer._id;
           });
           vm.attempt.$update(function() {
-            $interval.cancel(vm.intervalToken);
-            $timeout.cancel(vm.timeoutToken);
-
-            if (!$scope.$parent.vm.endCourse) {
-              $scope.$parent.vm.nextSection();
-            } else {
-              vm.completeCourse = true;
-            }
           });
         });
       });
