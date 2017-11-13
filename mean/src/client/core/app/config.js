@@ -9,7 +9,7 @@
     applicationModuleVendorDependencies: ['ngResource', 'ngMessages', 'ngSanitize', 'ngFileUpload', 'ui.router',
       'ui-notification', 'ui.bootstrap', 'pascalprecht.translate','ngAudio', 'LocalStorageModule', 'underscore', 'datatables', 'datatables.buttons',
       angularDragula(angular), 'kendo.directives', 'ng.deviceDetector', 'ngCsv', 'pdf',
-      'ui.calendar', 'easypiechart', 'metricsgraphics'],
+      'ui.calendar', 'easypiechart', 'metricsgraphics', 'ng-webcam'],
     registerModule: registerModule
   };
 
