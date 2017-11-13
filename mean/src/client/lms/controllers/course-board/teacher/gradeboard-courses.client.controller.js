@@ -82,8 +82,12 @@
               totalScore: scores.totalPercent,
               scores: scores.scores
             };
-            curr.totalScore = scores.scores[0].rawPercent;
-            curr.timeStart = parseInt(scores.scores[0].timeStart);
+            curr.totalScore = 0;
+            curr.timeStart = 0;
+            if (scores.scores.length > 1) {
+              curr.totalScore = scores.scores[0].rawPercent
+              curr.timeStart = parseInt(scores.scores[0].timeStart);
+            }
             memberCount++;
             if (memberCount === vm.members.length) {
               vm.members = _(vm.members).chain().sortBy(function(member) {
