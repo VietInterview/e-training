@@ -161,7 +161,7 @@ module.exports = {
         'public/lib/angular/angular.js',
         'public/lib/angular-ui-router/release/angular-ui-router.js',
         'public/lib/angular-pdf-viewer/dist/angular-pdf-viewer.min.js',
-        'public/lib/angular-sanitize/angular-sanitize.js',        
+        'public/lib/angular-sanitize/angular-sanitize.js',
         'public/lib/oclazyload/dist/ocLazyLoad.js',
         'public/lib/angular-breadcrumb/dist/angular-breadcrumb.js',
         'public/lib/angular-resource/angular-resource.js',
@@ -241,8 +241,7 @@ module.exports = {
         'public/lib/js-xlsx/shim.js',
         'public/lib/js-xlsx/jszip.js',
         'public/lib/js-xlsx/dist/xlsx.full.min.js',
-        'public/lib/webcamjs/webcam.min.js',
-        'public/lib/ng-webcam/dist/ng-webcam.min.js'
+        'src/client/shared/directives/angular-camera.js'
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']
     },

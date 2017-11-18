@@ -135,22 +135,11 @@
       }
     }
 
-    vm.onCaptureComplete = function(src) {
-      vm.attempt.webcam = src[0];
-      vm.attempt.$update(function() {
-        $interval.cancel(vm.intervalToken);
-        $timeout.cancel(vm.timeoutToken);
-
-        if (!$scope.$parent.vm.endCourse) {
-          $scope.$parent.vm.nextSection();
-        } else {
-          vm.completeCourse = true;
-        }
-      });
-    };
+    $scope.$watch('media', function(media) {
+      $scope.media = media;
+    });
 
     function submitQuiz() {
-      $scope.$broadcast('ngWebcam_capture');
       save(function() {
         UIkit.modal.confirm($translate.instant('COMMON.CONFIRM_PROMPT'), function() {
           vm.attempt.status = 'completed';
@@ -158,7 +147,16 @@
           vm.attempt.answers = _.map(vm.questions, function(obj) {
             return obj.answer._id;
           });
+          vm.attempt.webcam = $scope.media;
           vm.attempt.$update(function() {
+            $interval.cancel(vm.intervalToken);
+            $timeout.cancel(vm.timeoutToken);
+
+            if (!$scope.$parent.vm.endCourse) {
+              $scope.$parent.vm.nextSection();
+            } else {
+              vm.completeCourse = true;
+            }
           });
         });
       });
