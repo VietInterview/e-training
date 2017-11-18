@@ -240,8 +240,7 @@ module.exports = {
         'public/lib/ng-csv/build/ng-csv.js',
         'public/lib/js-xlsx/shim.js',
         'public/lib/js-xlsx/jszip.js',
-        'public/lib/js-xlsx/dist/xlsx.full.min.js',
-        'src/client/shared/directives/angular-camera.js'
+        'public/lib/js-xlsx/dist/xlsx.full.min.js'
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']
     },
