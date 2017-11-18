@@ -29,6 +29,16 @@
 								</tr>
 							</thead>
 							<tbody>
+                <tr>
+                  <td class="uk-width-1-10">Webcam</td>
+                  <td class="uk-width-1-10 uk-text-center"
+                      ng-repeat="node in quizSectionNodes">
+                      <span
+                        ng-repeat="attempt in node.attempts | orderBy: '-start'" ng-if="attempt.webcam">
+                        <img style="max-height: 120px;" ng-src="{{attempt.webcam}}" alt="webcam">
+                        </span>
+                  </td>
+                </tr>
 								<tr>
 									<td class="uk-width-1-10">{{"PAGE.LMS.MY_COURSES.COURSE_GRADE.QUIZ_RATE"
 										| translate}}</td>
