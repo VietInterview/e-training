@@ -123,6 +123,9 @@
             }
             return false;
           };
+          scope.$on('takePicture',function(event, data){
+            scope.takePicture()
+          });
           scope.addFrame = function (context, url, callback) {
             var overlay;
             if (callback == null) {

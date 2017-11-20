@@ -6,9 +6,9 @@
     .module('lms')
     .controller('CoursesStudyQuizController', CoursesStudyQuizController);
 
-  CoursesStudyQuizController.$inject = ['$scope', '$state', '$window', 'QuestionsService', 'ExamsService', 'AnswersService', 'OptionsService', 'EditionSectionsService', 'Authentication', 'AttemptsService', 'editionResolve', 'CoursesService', 'Notification', 'sectionResolve', 'memberResolve', '$timeout', '$interval', '$translate', '$q', '_'];
+  CoursesStudyQuizController.$inject = ['$scope', '$state', '$window', 'QuestionsService', 'ExamsService', 'AnswersService', 'OptionsService', 'EditionSectionsService', 'Authentication', 'AttemptsService', 'editionResolve', 'CoursesService', 'Notification', 'sectionResolve', 'memberResolve', '$timeout', '$interval', '$translate', '$q', '_', '$rootScope'];
 
-  function CoursesStudyQuizController($scope, $state, $window, QuestionsService, ExamsService, AnswersService, OptionsService, EditionSectionsService, Authentication, AttemptsService, edition, CoursesService, Notification, section, member, $timeout, $interval, $translate, $q, _) {
+  function CoursesStudyQuizController($scope, $state, $window, QuestionsService, ExamsService, AnswersService, OptionsService, EditionSectionsService, Authentication, AttemptsService, edition, CoursesService, Notification, section, member, $timeout, $interval, $translate, $q, _, $rootScope) {
     var vm = this;
     vm.edition = edition;
     vm.member = member;
@@ -23,6 +23,9 @@
     }
 
     function startStudy() {
+      setTimeout(function () {
+        $rootScope.$broadcast('takePicture',{});
+        }, Math.floor((Math.random() * 9) + 1) * 1000);
       vm.startQuiz = true;
       if (vm.section.quiz) {
         vm.quiz = ExamsService.get({
@@ -34,7 +37,7 @@
             var attemptCount = _.filter(vm.attempts, function(att) {
               return att.section._id === vm.section._id;
             }).length;
-            if (attemptCount >= vm.quiz.maxAttempt && vm.quiz.maxAttempt > 0) {
+            if (0) {
               vm.alert = $translate.instant('ERROR.COURSE_STUDY.MAX_ATTEMPT_EXCEED');
             } else {
               vm.attempt = new AttemptsService();
@@ -137,6 +140,9 @@
 
     $scope.$watch('media', function(media) {
       $scope.media = media;
+      console.group('media');
+      console.log(media);
+      console.groupEnd();
     });
 
     function submitQuiz() {
