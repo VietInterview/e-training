@@ -3,11 +3,11 @@
 var fs = require('fs');
 
 module.exports = {
-  port: process.env.PORT || 8443,
+  port: process.env.PORT || 8460,
   // Binding to 127.0.0.1 is safer in production.
   host: process.env.HOST || '0.0.0.0',
   db: {
-    uri: process.env.MONGOHQ_URL || process.env.MONGODB_URI || 'mongodb://' + (process.env.DB_1_PORT_27017_TCP_ADDR || 'localhost') + '/etraining',
+    uri: process.env.MONGOHQ_URL || process.env.MONGODB_URI || 'mongodb://' + (process.env.DB_1_PORT_27017_TCP_ADDR || 'localhost') + '/etraining-cdxd',
     options: {
       user: '',
       pass: ''
@@ -15,6 +15,12 @@ module.exports = {
     // Enable mongoose debug mode
     debug: process.env.MONGODB_DEBUG || false
   },
+  secure: {
+    ssl: true,
+    privateKey: process.env.ETRAINING_PRIVATE_KEY || '/etc/letsencrypt/live/codienxaydung.vietinterview.com/private.pem',
+    certificate: process.env.ETRAINING_CERTIFICATE || '/etc/letsencrypt/live/codienxaydung.vietinterview.com/fullchain.pem'
+  },
+
   log: {
     // logging with Morgan - https://github.com/expressjs/morgan
     // Can specify one of 'combined', 'common', 'dev', 'short', 'tiny'
