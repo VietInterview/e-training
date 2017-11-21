@@ -17,10 +17,9 @@ module.exports = {
   },
   secure: {
     ssl: true,
-    privateKey: process.env.ETRAINING_PRIVATE_KEY || '/etc/letsencrypt/live/codienxaydung.vietinterview.com/private.pem',
-    certificate: process.env.ETRAINING_CERTIFICATE || '/etc/letsencrypt/live/codienxaydung.vietinterview.com/fullchain.pem'
+    privateKey: process.env.ETRAINING_PRIVATE_KEY || 'config/sslcerts/key.pem',
+    certificate: process.env.ETRAINING_CERTIFICATE || 'config/sslcerts/cert.pem'
   },
-
   log: {
     // logging with Morgan - https://github.com/expressjs/morgan
     // Can specify one of 'combined', 'common', 'dev', 'short', 'tiny'
