@@ -3,7 +3,7 @@
 var fs = require('fs');
 
 module.exports = {
-  port: process.env.PORT || 8443,
+  port: process.env.PORT || 8460,
   // Binding to 127.0.0.1 is safer in production.
   host: process.env.HOST || '0.0.0.0',
   db: {
@@ -58,6 +58,11 @@ module.exports = {
     clientSecret: process.env.PAYPAL_SECRET || 'CLIENT_SECRET',
     callbackURL: '/api/auth/paypal/callback',
     sandbox: false
+  },
+  secure: {
+    ssl: true,
+    privateKey: process.env.ETRAINING_PRIVATE_KEY || '/etc/letsencrypt/live/codienxaydung.vietinterview.com/private.pem',
+    certificate: process.env.ETRAINING_CERTIFICATE || '/etc/letsencrypt/live/codienxaydung.vietinterview.com/fullchain.pem'
   },
   mailer: {
     from: 'contact@vietinterview.com',
