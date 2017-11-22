@@ -61,7 +61,7 @@
                             data-uk-tab="{connect:'#user_profile_tabs_content', animation:'slide-horizontal'}"
                             data-uk-sticky="{ top: 48, media: 960 }">
                             <li class="uk-active"><a href="#">{{'PAGE.PROFILE.BASIC'|translate}}</a></li>
-                            <li><a href="#">{{'PAGE.PROFILE.COMPANY'|translate}}</a></li>
+                            <li><a href="#">{{'PAGE.PROFILE.GROUP'|translate}}</a></li>
                         </ul>
                         <ul id="user_profile_tabs_content" class="uk-switcher uk-margin">
                             <li>
@@ -69,13 +69,93 @@
                                      data-uk-grid-margin>
                                     <div class="uk-width-large-1-2">
                                         <h4 class="heading_c uk-margin-small-bottom">
-                                            {{'PAGE.PROFILE.CONTACT_INFO'|translate}}</h4>
-                                        <ul class="md-list md-list-addon">
+                                            {{'PAGE.PROFILE.GENERAL_INFO'|translate}}</h4>
+                                        <ul class="md-list" >
                                             <li>
 
-                                                <div class="md-list-addon-element">
-                                                    <i class="md-list-addon-icon material-icons">&#xE158;</i>
+                          
+                                                <div class="md-list-content">
+                                                    <span class="md-list-heading">{{vm.user.firstName}}</span> <span
+                                                        class="uk-text-small uk-text-muted">{{'MODEL.USER.FIRST_NAME'|translate}}</span>
                                                 </div>
+                                            </li>
+                                            <li>
+
+                                                <div class="md-list-content">
+                                                    <span class="md-list-heading">{{vm.user.lastname}}</span> <span
+                                                        class="uk-text-small uk-text-muted">{{'MODEL.USER.LAST_NAME'|translate}}</span>
+                                                </div>
+                                            </li>
+                                            <li>
+
+                                                <div class="md-list-content">
+                                                    <span class="md-list-heading">{{vm.user.birthday}}</span> <span
+                                                        class="uk-text-small uk-text-muted">{{'MODEL.USER.BIRTHDAY'|translate}}</span>
+                                                </div>
+                                            </li>
+                                            <li>
+                          
+                                                <div class="md-list-content">
+                                                    <span class="md-list-heading">{{vm.user.gender}}</span> <span
+                                                        class="uk-text-small uk-text-muted">{{'MODEL.USER.GENDER'|translate}}</span>
+                                                </div>
+                                            </li>
+
+                                             <li>
+
+                                                <div class="md-list-content">
+                                                    <span class="md-list-heading">{{vm.user.residence_address}}</span> <span
+                                                        class="uk-text-small uk-text-muted">{{'MODEL.USER.RESIDENCE_ADDRESS'|translate}}</span>
+                                                </div>
+                                            </li>
+                                            <li>
+                          
+                                                <div class="md-list-content">
+                                                    <span class="md-list-heading">{{vm.user.place_of_register}}</span> <span
+                                                        class="uk-text-small uk-text-muted">{{'MODEL.USER.PLACE_OF_REGISTER'|translate}}</span>
+                                                </div>
+                                            </li>
+
+                                             <li>
+
+                                                <div class="md-list-content">
+                                                    <span class="md-list-heading">{{vm.user.ethnicity}}</span> <span
+                                                        class="uk-text-small uk-text-muted">{{'MODEL.USER.ETHNIC'|translate}}</span>
+                                                </div>
+                                            </li>
+                                            <li>
+                          
+                                                <div class="md-list-content">
+                                                    <span class="md-list-heading">{{vm.user.family_norm}}</span> <span
+                                                        class="uk-text-small uk-text-muted">{{'MODEL.USER.FAMILY_NORM'|translate}}</span>
+                                                </div>
+                                            </li>
+
+                                             <li>
+
+                                                <div class="md-list-content">
+                                                    <span class="md-list-heading">{{vm.user.religion}}</span> <span
+                                                        class="uk-text-small uk-text-muted">{{'MODEL.USER.RELIGION'|translate}}</span>
+                                                </div>
+                                            </li>
+                                            <li>
+                          
+                                                <div class="md-list-content">
+                                                    <span class="md-list-heading">{{vm.user.social_security_id}}</span> <span
+                                                        class="uk-text-small uk-text-muted">{{'MODEL.USER.SOCIAL_ID'|translate}}</span>
+                                                </div>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+
+                                    <div class="uk-width-large-1-2">
+                                        <h4 class="heading_c uk-margin-small-bottom">
+                                            {{'PAGE.PROFILE.CONTACT_INFO'|translate}}</h4>
+                                        <ul class="md-list" >
+                                            <li>
+
+                          
                                                 <div class="md-list-content">
                                                     <span class="md-list-heading">{{vm.user.email}}</span> <span
                                                         class="uk-text-small uk-text-muted">{{'MODEL.USER.EMAIL'|translate}}</span>
@@ -83,79 +163,103 @@
                                             </li>
                                             <li>
 
-                                                <div class="md-list-addon-element">
-                                                    <i class="md-list-addon-icon uk-icon-calendar"></i>
-                                                </div>
-                                                <div class="md-list-content">
-                                                    <span class="md-list-heading">{{vm.user.birthday}}</span> <span
-                                                        class="uk-text-small uk-text-muted">{{'MODEL.USER.BIRTHDAY'|translate}}</span>
-                                                </div>
-                                            </li>
-                                            <li>
-
-                                                <div class="md-list-addon-element">
-                                                    <i class="md-list-addon-icon uk-icon-calendar"></i>
-                                                </div>
-                                                <div class="md-list-content">
-                                                    <span class="md-list-heading">{{vm.user.startDate}}</span> <span
-                                                        class="uk-text-small uk-text-muted">{{'MODEL.USER.START_DATE'|translate}}</span>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="md-list-addon-element">
-                                                    <i class="md-list-addon-icon material-icons">&#xE0CD;</i>
-                                                </div>
                                                 <div class="md-list-content">
                                                     <span class="md-list-heading">{{vm.user.phone}}</span> <span
                                                         class="uk-text-small uk-text-muted">{{'MODEL.USER.PHONE'|translate}}</span>
                                                 </div>
                                             </li>
+                                            <li>
+
+                                                <div class="md-list-content">
+                                                    <span class="md-list-heading">{{vm.user.current_address}}</span> <span
+                                                        class="uk-text-small uk-text-muted">{{'MODEL.USER.CURRENT_ADDRESS'|translate}}</span>
+                                                </div>
+                                            </li>
+                                            <li>
+                          
+                                                <div class="md-list-content">
+                                                    <span class="md-list-heading">{{vm.user.contact_person}}</span> <span
+                                                        class="uk-text-small uk-text-muted">{{'MODEL.USER.CONTACT_PERSON'|translate}}</span>
+                                                </div>
+                                            </li>
 
                                         </ul>
                                     </div>
+
                                     <div class="uk-width-large-1-2">
                                         <h4 class="heading_c uk-margin-small-bottom">
-                                            {{'PAGE.PROFILE.SOCIAL_ACCOUNT'|translate}}</h4>
-                                        <ul class="md-list md-list-addon">
+                                            {{'PAGE.PROFILE.LEVEL'|translate}}</h4>
+                                        <ul class="md-list" >
+                                            <li>
 
-                                            <li>
-                                                <div class="md-list-addon-element">
-                                                    <i class="md-list-addon-icon uk-icon-facebook-official"></i>
-                                                </div>
+                          
                                                 <div class="md-list-content">
-                                                    <span class="md-list-heading">{{vm.user.facebook}}</span> <span
-                                                        class="uk-text-small uk-text-muted">Facebook</span>
+                                                    <span class="md-list-heading">{{vm.user.academic_assessment}}</span> <span
+                                                        class="uk-text-small uk-text-muted">{{'MODEL.USER.ACADEMIC_ASSESSMENT'|translate}}</span>
                                                 </div>
                                             </li>
                                             <li>
-                                                <div class="md-list-addon-element">
-                                                    <i class="md-list-addon-icon uk-icon-child"></i>
-                                                </div>
+
                                                 <div class="md-list-content">
-                                                    <span class="md-list-heading">{{vm.user.gender}}</span> <span
-                                                        class="uk-text-small uk-text-muted">{{'MODEL.USER.GENDER'|translate}}</span>
+                                                    <span class="md-list-heading">{{vm.user.personality_assessment}}</span> <span
+                                                        class="uk-text-small uk-text-muted">{{'MODEL.USER.PERSONALITY_ASSESSMENT'|translate}}</span>
                                                 </div>
                                             </li>
                                             <li>
-                                                <div class="md-list-addon-element">
-                                                    <i class="md-list-addon-icon material-icons ">&#xE870;</i>
-                                                </div>
+
                                                 <div class="md-list-content">
-                                                    <span class="md-list-heading">{{vm.user.driverLicense}}</span> <span
-                                                        class="uk-text-small uk-text-muted">{{'MODEL.USER.DRIVER_LICENSE'|translate}}</span>
+                                                    <span class="md-list-heading">{{vm.user.graduation_assessment}}</span> <span
+                                                        class="uk-text-small uk-text-muted">{{'MODEL.USER.GRADUATE_ASSESSMENT'|translate}}</span>
                                                 </div>
                                             </li>
                                             <li>
-                                                <div class="md-list-addon-element">
-                                                    <i class="md-list-addon-icon uk-icon-twitter"></i>
-                                                </div>
+                          
                                                 <div class="md-list-content">
-                                                    <span class="md-list-heading">{{vm.user.twitter}}</span> <span
-                                                        class="uk-text-small uk-text-muted">Twitter</span>
+                                                    <span class="md-list-heading">{{vm.user.graduate_rank}}</span> <span
+                                                        class="uk-text-small uk-text-muted">{{'MODEL.USER.GRADUATE_RANK'|translate}}</span>
                                                 </div>
                                             </li>
+
                                         </ul>
                                     </div>
+
+                                    <div class="uk-width-large-1-2">
+                                        <h4 class="heading_c uk-margin-small-bottom">
+                                            {{'PAGE.PROFILE.FAMILY'|translate}}</h4>
+                                        <ul class="md-list" >
+                                            <li>
+
+                          
+                                                <div class="md-list-content">
+                                                    <span class="md-list-heading">{{vm.user.father}}</span> <span
+                                                        class="uk-text-small uk-text-muted">{{'MODEL.USER.FATHER'|translate}}</span>
+                                                </div>
+                                            </li>
+                                            <li>
+
+                                                <div class="md-list-content">
+                                                    <span class="md-list-heading">{{vm.user.mother}}</span> <span
+                                                        class="uk-text-small uk-text-muted">{{'MODEL.USER.MOTHER'|translate}}</span>
+                                                </div>
+                                            </li>
+                                            <li>
+
+                                                <div class="md-list-content">
+                                                    <span class="md-list-heading">{{vm.user.spouse}}</span> <span
+                                                        class="uk-text-small uk-text-muted">{{'MODEL.USER.SPOUSE'|translate}}</span>
+                                                </div>
+                                            </li>
+                                            <li>
+                          
+                                                <div class="md-list-content">
+                                                    <span class="md-list-heading">{{vm.user.sibling}}</span> <span
+                                                        class="uk-text-small uk-text-muted">{{'MODEL.USER.SIBLING'|translate}}</span>
+                                                </div>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+
                                 </div>
 
                             </li>
