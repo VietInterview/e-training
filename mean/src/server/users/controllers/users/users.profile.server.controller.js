@@ -174,7 +174,26 @@ exports.me = function(req, res) {
       gender: req.user.gender,
       startDate: req.user.startDate,
       driverLicense: req.user.driverLicense,
-      additionalProvidersData: req.user.additionalProvidersData
+      additionalProvidersData: req.user.additionalProvidersData,
+      ethnicity: req.user.ethnicity,
+      residence_address: req.user.residence_address,
+      contact_person: req.user.contact_person,
+      current_address: req.user.current_address,
+      father: req.user.father,
+      sibling: req.user.sibling,
+      spouse: req.user.spouse,
+      religion: req.user.religion,
+      family_norm: req.user.family_norm,
+      year_of_graduate: req.user.year_of_graduate,
+      place_of_graduate: req.user.place_of_graduate,
+      place_of_register: req.user.place_of_register,
+      academic_assessment: req.user.academic_assessment,
+      personality_assessment: req.user.personality_assessment,
+      graduate_assessment: req.user.graduate_assessment,
+      graduate_assessment: req.user.graduate_assessment,
+      graduate_rank: req.user.graduate_rank,
+      social_security_id: req.user.social_security_id,
+      mother: req.user.mother
     };
   }
 

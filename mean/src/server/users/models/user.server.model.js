@@ -82,6 +82,77 @@ var UserSchema = new Schema({
     type: String,
     default: ''
   },
+  religion: {
+    type: String,
+    default: ''
+  },
+  family_norm: {
+    type: String,
+    default: ''
+  },
+  ethnicity: {
+    type: String,
+    default: ''
+  },
+  residence_address: {
+    type: String,
+    default: ''
+  },
+  current_address: {
+    type: String,
+    default: ''
+  },
+  contact_person: {
+    type: String,
+    default: ''
+  },
+  father: {
+    type: String,
+    default: ''
+  },
+  sibling: {
+    type: String,
+    default: ''
+  },
+  spouse: {
+    type: String,
+    default: ''
+  },
+  year_of_graduate: {
+    type: Number,
+  },
+  place_of_graduate: {
+    type: String,
+    default: ''
+  },
+  place_of_register: {
+    type: String,
+    default: ''
+  },
+  academic_assessment: {
+    type: String,
+    default: ''
+  },
+  personality_assessment: {
+    type: String,
+    default: ''
+  },
+  graduate_assessment: {
+    type: String,
+    default: ''
+  },
+  graduate_rank: {
+    type: String,
+    default: ''
+  },
+  social_security_id: {
+    type: String,
+    default: ''
+  },
+  mother: {
+    type: String,
+    default: ''
+  },
   exp_year: {
     type: Date
   },

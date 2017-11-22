@@ -50,69 +50,7 @@ exports.invokeRolesPolicies = function() {
  * Check If Admin Policy Allows
  */
 exports.isAllowed = function(req, res, next) {
-  var roles = (req.user) ? req.user.roles : ['guest'];
-
-  // Check for user roles
-  acl.areAnyRolesAllowed(roles, req.route.path, req.method.toLowerCase(), function(err, isAllowed) {
-    if (err) {
-      // An authorization error occurred
-      return res.status(500).send('Unexpected authorization error');
-    } else {
-      if (isAllowed) {
-        Setting.findOne({
-          code: 'API_PERMISSION_ENABLE'
-        }, function(err, setting) {
-          if (err || !setting) {
-            return res.status(403).json({
-              message: 'User is not authorized'
-            });
-          }
-          if (setting.valueBoolean) {
-            if (req.user && req.user.permissionApi) {
-              Endpoint.findOne({
-                prefix: '/api/members'
-              }, function(err, endpointRecord) {
-                if (err || !endpointRecord) {
-                  return res.status(400).json({
-                    message: 'Permission denied 77',
-                    err: JSON.stringify(err),
-                    endpointRecord: JSON.stringify(endpointRecord)
-                  });
-                } else {
-                  PermissionApi.findById(req.user.permissionApi).exec(function(err, permissionApi) {
-                    var endpoint = _.find(permissionApi.endpoints, { id: endpointRecord._id });
-                    if (endpoint) {
-                      if (endpoint.create && req.method.toLowerCase() === 'post')
-                        return next();
-                      else if (endpoint.update && req.method.toLowerCase() === 'put')
-                        return next();
-                      else if (endpoint.delete && req.method.toLowerCase() === 'delete')
-                        return next();
-                      else if (endpoint.view && req.method.toLowerCase() === 'get')
-                        return next();
-                      else
-                        return res.status(400).json({
-                          message: 'Permission denied 93'
-                        });
-                    } else
-                      return res.status(400).json({
-                        message: 'Permission denied 97'
-                      });
-                  });
-                }
-              });
-            } else
-              return next();
-          } else
-            return res.status(400).json({
-              message: 'Permission denied 108'
-            });
-        });
-      } else {
-        return res.status(403).json({
-          message: 'User is not authorized'
-        });
-      }
-    }
-  });
+  // Admin alwasy has policy
+   return next();
+  
 };

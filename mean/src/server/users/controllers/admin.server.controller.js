@@ -197,6 +197,25 @@ exports.update = function(req, res) {
   user.gender = req.body.gender;
   user.startDate = req.body.startDate;
   user.driverLicense = req.body.driverLicense;
+  user.ethnicity =  req.user.ethnicity;
+  user.residence_address =  req.user.residence_address;
+  user.contact_person =  req.user.contact_person;
+  user.current_address =  req.user.current_address;
+  user.father =  req.user.father;
+  user.sibling =  req.user.sibling;
+  user.spouse =  req.user.spouse;
+  user.year_of_graduate =  req.user.year_of_graduate;
+  user.place_of_graduate =  req.user.place_of_graduate;
+  user.place_of_register =  req.user.place_of_register;
+  user.academic_assessment =  req.user.academic_assessment;
+  user.personality_assessment =  req.user.personality_assessment;
+  user.graduate_assessment =  req.user.graduate_assessment;
+  user.graduate_assessment =  req.user.graduate_assessment;
+  user.graduate_rank =  req.user.graduate_rank;
+  user.social_security_id =  req.user.social_security_id;
+  user.mother =  req.user.mother;
+  user.religion =  req.user.religion;
+  user.family_norm =  req.user.family_norm;
 
   user.save(function(err) {
     if (err) {
