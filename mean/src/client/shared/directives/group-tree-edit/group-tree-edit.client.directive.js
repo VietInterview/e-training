@@ -247,7 +247,7 @@
                 });
             });
           if (group.category === 'question')
-            QuestionsService.byGroup({
+            QuestionsService.byCategory({
               groupId: group._id
             }, function(contents) {
               if (contents.length > 0) {
