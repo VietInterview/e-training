@@ -55,6 +55,21 @@
           else
             return '';
         }),
+      DTColumnBuilder.newColumn('birthday').withTitle($translate.instant('MODEL.USER.BIRTHDAY')),
+      DTColumnBuilder.newColumn(null).withTitle($translate.instant('MODEL.USER.GENDER'))
+        .renderWith(function(data, type, full, meta) {
+          if (data.gender =='male')
+            return $translate.instant('MODEL.USER.MALE');
+          if (data.gender =='female')
+            return $translate.instant('MODEL.USER.FEMALE');
+        }),
+      DTColumnBuilder.newColumn(null).withTitle($translate.instant('MODEL.USER.GROUP'))
+        .renderWith(function(data, type, full, meta) {
+          if (data.group)
+            return data.group.name;
+          else
+            return '';
+        }),
       DTColumnBuilder.newColumn('phone').withTitle($translate.instant('MODEL.USER.PHONE')).notVisible(),
       DTColumnBuilder.newColumn('position').withTitle($translate.instant('MODEL.USER.POSITION')).notVisible(),
       DTColumnBuilder.newColumn('facebook').withTitle('Facebook').notVisible(),
