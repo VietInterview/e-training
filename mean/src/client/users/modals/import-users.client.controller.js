@@ -76,6 +76,18 @@
         title: $translate.instant('MODEL.USER.TWITTER'),
         value: 'twitter',
         parent_id: 1
+      },
+      {
+        id: 9,
+        title: $translate.instant('MODEL.USER.BIRTHDAY'),
+        value: 'birthday',
+        parent_id: 1
+      },
+      {
+        id: 10,
+        title: $translate.instant('MODEL.USER.GENDER'),
+        value: 'gender',
+        parent_id: 1
       }
     ];
 
