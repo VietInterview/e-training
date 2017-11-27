@@ -55,7 +55,13 @@
           else
             return '';
         }),
-      DTColumnBuilder.newColumn('birthday').withTitle($translate.instant('MODEL.USER.BIRTHDAY')),
+      DTColumnBuilder.newColumn('null').withTitle($translate.instant('MODEL.USER.BIRTHDAY'))
+      .renderWith(function(data, type, full, meta) {
+          if (data.birthday)
+            return $filter('date')(data.birthday,'DD/MM/YYYY');
+          else
+            return '';
+        }),,
       DTColumnBuilder.newColumn(null).withTitle($translate.instant('MODEL.USER.GENDER'))
         .renderWith(function(data, type, full, meta) {
           if (data.gender =='male')
