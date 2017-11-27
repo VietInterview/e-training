@@ -186,7 +186,7 @@ var s = module.exports = {
     certificate: process.env.ETRAINING_CERTIFICATE || 'config/sslcerts/cert.pem'
   },
   seedDB: {
-    seed: true,
+    seed: false,
     options: {
       logResults: process.env.MONGO_SEED_LOG_RESULTS !== 'false',
       seedUser: {
