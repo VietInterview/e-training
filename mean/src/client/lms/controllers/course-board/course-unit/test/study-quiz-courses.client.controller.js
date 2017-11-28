@@ -153,7 +153,6 @@
     };
 
     function submitQuiz() {
-      $scope.$broadcast('ngWebcam_capture');
       save(function() {
         UIkit.modal.confirm($translate.instant('COMMON.CONFIRM_PROMPT'), function() {
           vm.attempt.status = 'completed';
