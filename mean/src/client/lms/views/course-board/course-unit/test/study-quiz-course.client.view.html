@@ -72,31 +72,9 @@
 					<a class="md-btn md-btn-primary md-btn-wave-light "
 						ng-show="vm.index == vm.questions.length-1"
 
-						data-uk-modal="{target:'#modalSubmitQuiz'}">
+						ng-click="vm.submitQuiz()">
 						{{'ACTION.SUBMIT_EXAM'|translate}}
 					</a>
-					<div id="modalSubmitQuiz" class="uk-modal">
-						<div class="uk-modal-dialog">
-							<button type="button" class="uk-modal-close uk-close"></button>
-							<div class="uk-modal-header">
-								<h2>Chụp ảnh người làm bài</h2>
-							</div>
-							<div class="uk-modal-body">
-								<ng-webcam config="vm.config"
-													 on-error="vm.onError(err)"
-													 on-load="vm.onLoad()"
-													 on-live="vm.onLive()"
-													 on-capture-progress="vm.onCaptureProgress(src, progress)"
-													 on-capture-complete="vm.onCaptureComplete(src)"></ng-webcam>
-								<p>
-									Chụp ảnh của bạn bằng webcam để gửi kèm bài kiểm tra.
-								</p>
-							</div>
-							<div class="uk-modal-footer uk-text-right">
-								<button type="button" class="uk-button uk-button-primary" ng-click="vm.submitQuiz()">Nộp bài</button>
-							</div>
-						</div>
-					</div>
 				</div>
 				<div class="uk-width-1-3">
 					<a
