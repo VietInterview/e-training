@@ -93,7 +93,7 @@
 			></video>
 		</div>
 		<div ng-if="answer.videoUrl" class="uk-width-medium-1-2 uk-margin">
-			<video src="{{answer.videoUrl|trust}}"
+			<video src="{{answer.videoUrl}}"
 			video-autoplay
 				data-attr-autoplay={{videoAttr.autoplay}} video-control
 				data-attr-control={{videoAttr.controls}} video-muted
@@ -135,13 +135,13 @@
 		<div class="uk-width-1-2" ng-show="answer.audioUrl">
 			<div id="audio_answer">
 				<label for="audio_answer">{{'MODEL.ANSWER.AUDIO'|translate}}</label>
-				<video controls src="{{answer.audioUrl | trust}}"></video>
+				<video controls src="{{answer.audioUrl }}"></video>
 			</div>
 		</div>
 		<div class="uk-width-1-2" ng-show="answer.videoUrl">
 			<div id="video_answer">
 				<label for="video_answer">{{'MODEL.ANSWER.VIDEO'|translate}}</label>
-				<video controls src="{{answer.videoUrl | trust}}"></video>
+				<video controls src="{{answer.videoUrl }}"></video>
 			</div>
 		</div>
 	</div>
