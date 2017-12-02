@@ -15,6 +15,7 @@ module.exports = {
     // Enable mongoose debug mode
     debug: process.env.MONGODB_DEBUG || false
   },
+  domain: 'nissan.vietinterview.com',
   secure: {
     ssl: true,
     privateKey: '/etc/letsencrypt/live/nissan.vietinterview.com/privkey.pem',
