@@ -36,13 +36,13 @@
 		<div class="uk-width-1-2" ng-if="feedback.audioUrl">
 			<div id="audio_answer">
 				<label for="audio_answer">{{'MODEL.FEEDBACK.AUDIO'|translate}}</label>
-				<video controls src="{{feedback.audioUrl | trust}}"></video>
+				<video controls src="{{feedback.audioUrl }}"></video>
 			</div>
 		</div>
 		<div class="uk-width-1-2" ng-if="feedback.videoUrl">
 			<div id="video_answer">
 				<label for="video_answer">{{'MODEL.FEEDBACK.VIDEO'|translate}}</label>
-				<video controls src="{{feedback.videoUrl | trust}}"></video>
+				<video controls src="{{feedback.videoUrl }}"></video>
 			</div>
 		</div>
 	</div>
@@ -57,7 +57,7 @@
 		></video>
 	</div>
 	<div style="float: right;" ng-if="feedback.videoUrl" class="uk-width-medium-1-2 uk-margin">
-		<video src="{{feedback.videoUrl|trust}}"
+		<video src="{{feedback.videoUrl}}"
 		video-autoplay
 			data-attr-autoplay={{videoAttr.autoplay}} video-control
 			data-attr-control={{videoAttr.controls}} video-muted
