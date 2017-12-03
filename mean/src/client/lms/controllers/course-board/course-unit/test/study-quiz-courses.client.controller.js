@@ -162,7 +162,14 @@
           });
           vm.attempt.webcam = $scope.media;
           vm.attempt.$update(function() {
-            nextQuestion();
+            $interval.cancel(vm.intervalToken);
+            $timeout.cancel(vm.timeoutToken);
+
+            if (!$scope.$parent.vm.endCourse) {
+              $scope.$parent.vm.nextSection();
+            } else {
+              vm.completeCourse = true;
+            }
           });
         });
       });
