@@ -162,6 +162,7 @@
           });
           vm.attempt.webcam = $scope.media;
           vm.attempt.$update(function() {
+            nextQuestion();
           });
         });
       });
