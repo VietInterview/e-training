@@ -5,3 +5,5 @@ npm-debug.log
 mean/public/files/
 mean/public/media/
 /.DS_Store
+mean/node_modules/
+mean/yarn.lock
