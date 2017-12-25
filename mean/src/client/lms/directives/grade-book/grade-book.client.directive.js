@@ -19,6 +19,7 @@
       link: function(scope, element, attributes) {
         scope.sumStudentScore = 0;
         scope.sumQuizScore = 0;
+        scope.weightPercentEditEnable = false;
 
         var progress_chart_id = 'progress_chart';
         var progress_chart = c3.generate({
@@ -139,6 +140,22 @@
                 quizScore
               ]
             });
+          });
+        }
+
+        scope.doWeightPercentEditEnable = function (status) {
+          scope.weightPercentEditEnable = status
+        }
+
+        scope.doSaveAttempt = function () {
+          scope.weightPercentEditEnable = false
+          _.each(scope.quizSectionNodes, function (node) {
+            _.each(node.attempts, function (attempt) {
+              console.log(attempt);
+              AttemptsService.update(attempt, function (response) {
+                console.log(response);
+              })
+            })
           });
         }
 

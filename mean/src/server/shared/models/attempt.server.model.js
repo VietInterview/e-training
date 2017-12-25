@@ -56,6 +56,10 @@ var AttemptSchema = new Schema({
   webcam: {
     type: String,
     default: ''
+  },
+  weightPercentSaved: {
+    type: Number,
+    default: ''
   }
 });
 

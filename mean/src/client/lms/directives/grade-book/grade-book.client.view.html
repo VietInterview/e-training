@@ -48,14 +48,27 @@
 								<tr>
 									<td class="uk-width-1-10">{{"PAGE.LMS.MY_EXAMS.SCOREBOOK.TITLE"
 										| translate}}</td>
-									<td class="uk-width-1-10 uk-text-center"
-										ng-repeat="node in quizSectionNodes"><span
-										ng-repeat="attempt in node.attempts | orderBy: '-start'">{{attempt.weightPercent}}%
-											<answer-sheet sheet-id="attempt._id" exam="node.quiz"
-												answers="attempt.answers"
-												ng-if="attempt.answers && attempt.answers.length > 0 && node.quiz"></answer-sheet>
-											&nbsp;&#166;&nbsp;&nbsp;
+									<td class="uk-width-1-10 uk-text-center" ng-repeat="node in quizSectionNodes">
+                    <span ng-repeat="attempt in node.attempts | orderBy: '-start'">
+                      <span ng-if="!weightPercentEditEnable">
+                        {{ (attempt.weightPercentSaved) ? attempt.weightPercentSaved : attempt.weightPercent }}%
+                        <answer-sheet sheet-id="attempt._id" exam="node.quiz"
+                          answers="attempt.answers"
+                          ng-if="attempt.answers && attempt.answers.length > 0 && node.quiz"></answer-sheet>
+                        &nbsp;&#166;&nbsp;&nbsp;
+                      </span>
+                      <span ng-if="weightPercentEditEnable">
+                        <input type="number" ng-model="attempt.weightPercentSaved">
+                      </span>
 									</span></td>
+                  <td class="uk-width-1-10 uk-text-center">
+                    <i class="md-icon material-icons" ng-click="doWeightPercentEditEnable(true)"
+                       ng-if="!weightPercentEditEnable">edit</i>
+                    <i class="md-icon material-icons" ng-click="doWeightPercentEditEnable(false)"
+                       ng-if="weightPercentEditEnable">clear</i>
+                    <i class="md-icon material-icons" ng-click="doSaveAttempt(attempt)"
+                       ng-if="weightPercentEditEnable">check</i>
+                  </td>
 								</tr>
 								<tr>
 									<td class="uk-width-1-10">{{"MODEL.GRADESCHEME.BENCHMARK"
