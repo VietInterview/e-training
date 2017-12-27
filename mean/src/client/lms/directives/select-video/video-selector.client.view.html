@@ -6,7 +6,7 @@
 				id="video_player">
 				<div class="uk-grid">
 					<div class="uk-width-1-2 uk-container-center">
-						<video id="selectorVideo" src="{{object.videoURL | trust}}"
+						<video id="selectorVideo" src="{{object.videoURL}}"
 							video-autoplay data-attr-autoplay={{videoAttr.autoplay}}
 							video-control data-attr-control={{videoAttr.controls}}
 							video-muted data-attr-muted={{videoAttr.muted}}
@@ -20,10 +20,10 @@
 					id="video_upload-select" type="file">
 				</span>
 			</div>
-			
+
 			<div class="uk-margin" >
 				<button  type="button" class=" md-btn md-btn-icon md-btn-flat  md-btn-mini uk-modal-close" > <i
-					class="uk-icon-check uk-text-success"></i> {{'ACTION.ACCEPT'|translate}} 
+					class="uk-icon-check uk-text-success"></i> {{'ACTION.ACCEPT'|translate}}
 				</button>
 				<button  type="button" class=" md-btn md-btn-icon  md-btn-mini md-btn-flat "  ng-click="resetVideo()"> <i
 					class="uk-icon-refresh "></i> {{'ACTION.RESET'|translate}}
@@ -36,7 +36,7 @@
 				</button>
 
 			</div>
-		
+
 		</div>
 		<div id="video_upload-progressbar" class="uk-progress"
 			ng-show="showProgress">
