@@ -57,10 +57,11 @@
 													{{'COMMON.QUESTION_TYPE.PIC'|translate}}</span> <span
 													ng-if="question.type=='as'"
 													class="uk-text-italic uk-text-small"> -
-													{{'COMMON.QUESTION_TYPE.AS'|translate}}</span> <span
+                          {{'COMMON.QUESTION_TYPE.AS'|translate}}</span>
+                          <!-- <span
 													ng-if="question.grouped"
 													class="uk-text-italic uk-text-small"> -
-													{{'COMMON.QUESTION_TYPE.GROUP'|translate}}</span>
+													{{'COMMON.QUESTION_TYPE.GROUP'|translate}}</span> -->
 											</h3>
 										</div>
 										<div class="md-card-content">
@@ -88,9 +89,9 @@
 											<div ng-if="question.type=='pic'">
 												<point-click-question mode="'view'" question="question"></point-click-question>
 											</div>
-											<div ng-if="question.grouped">
+											<!-- <div ng-if="question.grouped">
 												<group-question mode="'view'" question="question"></group-question>
-											</div>
+											</div> -->
 										</div>
 									</div>
 								</div>
