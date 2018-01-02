@@ -69,7 +69,8 @@
                   rawScore: 0,
                   rawPercent: 0,
                   weightPercent: 0,
-                  sectionId: section._id
+                  sectionId: section._id,
+                  attempts: []
                 });
               }
               var latestAttempt = _.max(attempts, function(attempt) {
@@ -83,6 +84,7 @@
                   var differenceTravel = new Date(latestAttempt.end).getTime() - new Date(latestAttempt.start).getTime();
                   var seconds = Math.floor((differenceTravel) / (1000));
                   result.timeStart = seconds;
+                  result.attempts = attempts;
                   resolve(result);
                 });
               });
@@ -172,6 +174,13 @@
                   };
                   _.each(scores, function(score) {
                     courseScore.totalPercent += score.weightPercent;
+                    if (score.attempts.length && (isNaN(score.rawPercent) || !score.rawPercent)) {
+                      score.rawPercent = 0;
+                      _.each(score.attempts, function (attempt) {
+                        score.rawPercent += attempt.weightPercentSaved
+                      });
+                      score.rawPercent = (score.rawPercent / score.attempts.length).toFixed(2)
+                    }
                   });
                   resolve(courseScore);
                 });
