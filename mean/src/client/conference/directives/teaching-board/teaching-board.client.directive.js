@@ -79,7 +79,7 @@
         }
 
         scope.memberFullScreen = function (publisher) {
-          var member = public.member;
+          var member = publisher.member;
           console.log(publisher);
         }
 
