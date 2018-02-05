@@ -1,4 +1,4 @@
-(function () {
+(function() {
   'use strict';
 
   // Focus the element on page load
@@ -17,14 +17,14 @@
         slideshow: '='
       },
       templateUrl: '/src/client/conference/directives/teaching-board/teaching-board.client.view.html',
-      link: function (scope, element, attributes) {
+      link: function(scope, element, attributes) {
         scope.showListVideos = true;
         scope.members = [scope.teacher];
         scope.members = scope.members.concat(scope.students);
         scope.channelList = [];
         scope.videoSlots = [];
         var count = 0;
-        _.each(scope.members, function (member, index) {
+        _.each(scope.members, function(member, index) {
           scope.videoSlots.push({
             id: member._id,
             allocated: false,
@@ -33,9 +33,9 @@
           });
 
         });
-        scope.$watch('connected', function () {
+        scope.$watch('connected', function() {
           if (!scope.connected) {
-            _.each(scope.videoSlots, function (slot) {
+            _.each(scope.videoSlots, function(slot) {
               if (slot.allocated) {
                 webrtcSocket.unsubscribe(slot.publisher.member._id);
               }
@@ -48,7 +48,7 @@
         pdfDelegate
           .$getByHandle('my-pdf-container')
           .load(scope.defaultUrl);
-        scope.pdfSwitchPage = function (offset) {
+        scope.pdfSwitchPage = function(offset) {
           if (offset === 1) {
             pdfDelegate.$getByHandle('my-pdf-container').next();
           } else {
@@ -62,7 +62,7 @@
           })
         }
 
-        scope.memberDiscard = function (publisher) {
+        scope.memberDiscard = function(publisher) {
           var member = publisher.member;
           if (member) {
             member.handUp = false;
@@ -70,33 +70,28 @@
             conferenceSocket.unpublishChannel(member._id);
           }
           webrtcSocket.unsubscribe(publisher.member._id);
-          var subscribedSlots = _.find(scope.videoSlots, function (slot) {
+          var subscribedSlots = _.find(scope.videoSlots, function(slot) {
             return slot.publisher._id === publisher._id;
           });
-          if (subscribedSlots) {
+          if(subscribedSlots){
             subscribedSlots.allocated = false;
           }
-        }
-
-        scope.memberFullScreen = function (publisher) {
-          var member = publisher.member;
-          console.log(publisher);
         }
 
         function getPageInfo() {
           scope.currPage = pdfDelegate.$getByHandle('my-pdf-container').getCurrentPage();
           scope.totalPages = pdfDelegate.$getByHandle('my-pdf-container').getPageCount();
         }
-        scope.zoomOut = function () {
+        scope.zoomOut = function() {
           pdfDelegate.$getByHandle('my-pdf-container').zoomOut();
           scope.zoom = (scope.zoom === 50) ? 50 : (scope.zoom - 10);
         }
 
-        scope.zoomIn = function () {
+        scope.zoomIn = function() {
           pdfDelegate.$getByHandle('my-pdf-container').zoomIn();
           scope.zoom += 10;
         }
-        scope.uploadPresentation = function (file) {
+        scope.uploadPresentation = function(file) {
           if (!file || scope.member.role === 'student') {
             return;
           }
@@ -105,35 +100,35 @@
             data: {
               newCoursePresentation: file
             }
-          }).then(function (response) {
+          }).then(function(response) {
             var data = angular.fromJson(response.data);
             scope.pdfUrl = data.fileURL;
             pdfDelegate
               .$getByHandle('my-pdf-container')
               .load(scope.pdfUrl);
             conferenceSocket.presentation(data.fileURL, 'new', {});
-          }, function (errorResponse) {
+          }, function(errorResponse) {
             console.log(errorResponse);
           });
         }
-        conferenceSocket.onChannelStatus(function (channelList) {
+        conferenceSocket.onChannelStatus(function(channelList) {
           if (!scope.connected)
             return;
           scope.channelList = channelList;
-          var subscribedSlots = _.filter(scope.videoSlots, function (slot) {
+          var subscribedSlots = _.filter(scope.videoSlots, function(slot) {
             return _.contains(channelList, slot.publisher.member._id);
           });
-          var unsubscribedSlots = _.filter(scope.videoSlots, function (slot) {
+          var unsubscribedSlots = _.filter(scope.videoSlots, function(slot) {
             return !_.contains(channelList, slot.publisher.member._id);
           });
-          _.each(subscribedSlots, function (slot) {
+          _.each(subscribedSlots, function(slot) {
             if (!slot.allocated && slot.publisher.member._id !== scope.member.member._id) {
               var camera = document.getElementById(slot.videoId)
-              webrtcSocket.subscribe(camera, slot.publisher.member._id, function () {});
+              webrtcSocket.subscribe(camera, slot.publisher.member._id, function() {});
               slot.allocated = true;
             }
           });
-          _.each(unsubscribedSlots, function (slot) {
+          _.each(unsubscribedSlots, function(slot) {
             if (slot.allocated) {
               webrtcSocket.unsubscribe(slot.publisher.member._id);
             }
@@ -142,7 +137,7 @@
         });
 
         if (scope.member.role === 'student') {
-          conferenceSocket.onPresentation(function (url, action, params) {
+          conferenceSocket.onPresentation(function(url, action, params) {
             if (!scope.connected)
               return;
             if (action === 'new') {
